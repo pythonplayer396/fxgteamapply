@@ -1,50 +1,42 @@
 import { MongoClient } from 'mongodb'
 
+// Skip MongoDB check during build time
+if (!process.env.MONGODB_URI && process.env.NODE_ENV !== 'production') {
+  console.warn('Warning: MONGODB_URI is not set')
+}
+
+const uri = process.env.MONGODB_URI || ''
 const options = {}
 
 let client: MongoClient
-let clientPromise: Promise<MongoClient> | null = null
+let clientPromise: Promise<MongoClient>
 
-// Lazy getter that only initializes the connection when first called
-const getClientPromise = (): Promise<MongoClient> => {
-  if (!process.env.MONGODB_URI) {
-    throw new Error('Please add your MongoDB URI to .env.local')
+if (process.env.NODE_ENV === 'development') {
+  // In development mode, use a global variable so that the value
+  // is preserved across module reloads caused by HMR (Hot Module Replacement).
+  let globalWithMongo = global as typeof globalThis & {
+    _mongoClientPromise?: Promise<MongoClient>
   }
 
-  if (clientPromise) {
-    return clientPromise
+  if (!globalWithMongo._mongoClientPromise) {
+    if (!uri) {
+      throw new Error('Please add your MongoDB URI to .env.local')
+    }
+    client = new MongoClient(uri, options)
+    globalWithMongo._mongoClientPromise = client.connect()
   }
-
-  const uri = process.env.MONGODB_URI
-
-  if (process.env.NODE_ENV === 'development') {
-    // In development mode, use a global variable so that the value
-    // is preserved across module reloads caused by HMR (Hot Module Replacement).
-    let globalWithMongo = global as typeof globalThis & {
-      _mongoClientPromise?: Promise<MongoClient>
-    }
-
-    if (!globalWithMongo._mongoClientPromise) {
-      client = new MongoClient(uri, options)
-      globalWithMongo._mongoClientPromise = client.connect()
-    }
-    clientPromise = globalWithMongo._mongoClientPromise
+  clientPromise = globalWithMongo._mongoClientPromise
+} else {
+  // In production mode, it's best to not use a global variable.
+  if (!uri) {
+    // Return a rejected promise instead of throwing during module init
+    clientPromise = Promise.reject(new Error('Please add your MongoDB URI to environment variables'))
   } else {
-    // In production mode, it's best to not use a global variable.
     client = new MongoClient(uri, options)
     clientPromise = client.connect()
   }
-
-  return clientPromise
 }
 
-// Create a Proxy that lazily initializes the connection on first access
-const clientPromiseProxy = new Proxy({} as Promise<MongoClient>, {
-  get(target, prop) {
-    const promise = getClientPromise()
-    return (promise as any)[prop]
-  }
-})
-
-// Export the proxy that behaves like a Promise but only connects when used
-export default clientPromiseProxy
+// Export a module-scoped MongoClient promise. By doing this in a
+// separate module, the client can be shared across functions.
+export default clientPromise
