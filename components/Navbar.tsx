@@ -9,10 +9,14 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const { data: session } = useSession()
 
-  const navLinks = session ? [
-    { href: '/dashboard/profile', label: 'Profile', icon: <User className="w-4 h-4" /> },
-    { href: '/dashboard/status', label: 'My Applications', icon: <FileText className="w-4 h-4" /> },
-  ] : []
+  const navLinks = [
+    { href: '/', label: 'Home', icon: <User className="w-4 h-4" /> },
+    ...(session ? [
+      { href: '/dashboard', label: 'Dashboard', icon: <FileText className="w-4 h-4" /> },
+      { href: '/dashboard/profile', label: 'Profile', icon: <User className="w-4 h-4" /> },
+      { href: '/dashboard/status', label: 'Applications', icon: <FileText className="w-4 h-4" /> },
+    ] : [])
+  ]
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass-card mx-4 mt-4 animate-fade-in">
