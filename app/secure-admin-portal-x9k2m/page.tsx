@@ -416,8 +416,27 @@ export default function AdminDashboard() {
 
           {selectedApp && (
             <div className="glass-card sticky top-24">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-2xl font-bold">Application Details</h2>
+              {/* Header with Profile Picture and Name */}
+              <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
+                <div className="flex items-center gap-4">
+                  {selectedApp.sessionAvatar ? (
+                    <img 
+                      src={selectedApp.sessionAvatar} 
+                      alt={selectedApp.sessionUsername || selectedApp.discordUsername}
+                      className="w-16 h-16 rounded-full border-2 border-purple-500"
+                    />
+                  ) : (
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-2xl font-bold">
+                      {(selectedApp.sessionUsername || selectedApp.discordUsername).charAt(0).toUpperCase()}
+                    </div>
+                  )}
+                  <div>
+                    <h2 className="text-2xl font-bold">{selectedApp.sessionUsername || selectedApp.discordUsername}</h2>
+                    <p className="text-gray-400 text-sm">
+                      {selectedApp.type} Application
+                    </p>
+                  </div>
+                </div>
                 <button
                   onClick={() => setSelectedApp(null)}
                   className="text-gray-400 hover:text-white transition-colors"
@@ -426,16 +445,42 @@ export default function AdminDashboard() {
                   <XCircle className="w-6 h-6" />
                 </button>
               </div>
-              <div className="space-y-3 mb-6">
+
+              {/* Application Details Form */}
+              <div className="space-y-4 mb-6">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-[#0a0a0a] rounded-lg p-3 border border-white/5">
+                    <p className="text-xs text-gray-500 mb-1">ID</p>
+                    <p className="text-white font-mono text-sm">{selectedApp.id}</p>
+                  </div>
+                  <div className="bg-[#0a0a0a] rounded-lg p-3 border border-white/5">
+                    <p className="text-xs text-gray-500 mb-1">Status</p>
+                    <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
+                      selectedApp.status === 'pending' ? 'bg-yellow-500/20 text-yellow-500' :
+                      selectedApp.status === 'interview' ? 'bg-blue-500/20 text-blue-500' :
+                      selectedApp.status === 'approved' ? 'bg-green-500/20 text-green-500' :
+                      selectedApp.status === 'denied' ? 'bg-red-500/20 text-red-500' :
+                      'bg-orange-500/20 text-orange-500'
+                    }`}>
+                      {selectedApp.status.replace('_', ' ')}
+                    </span>
+                  </div>
+                </div>
+
                 {Object.entries(selectedApp).map(([key, value]) => {
-                  if (['id', 'status', 'submittedAt', 'updatedAt'].includes(key)) return null
+                  if (['id', 'status', 'submittedAt', 'updatedAt', 'sessionAvatar', 'sessionUsername', 'sessionEmail', 'sessionDiscordId'].includes(key)) return null
                   return (
-                    <div key={key}>
-                      <p className="text-sm text-gray-400 capitalize">{key.replace(/([A-Z])/g, ' $1')}</p>
-                      <p className="text-white">{value}</p>
+                    <div key={key} className="bg-[#0a0a0a] rounded-lg p-3 border border-white/5">
+                      <p className="text-xs text-gray-500 mb-1 capitalize">{key.replace(/([A-Z])/g, ' $1')}</p>
+                      <p className="text-white break-words">{String(value)}</p>
                     </div>
                   )
                 })}
+
+                <div className="bg-[#0a0a0a] rounded-lg p-3 border border-white/5">
+                  <p className="text-xs text-gray-500 mb-1">Submitted At</p>
+                  <p className="text-white">{new Date(selectedApp.submittedAt).toLocaleString()}</p>
+                </div>
               </div>
               <div className="space-y-2">
                 {selectedApp.status === 'pending' && (
