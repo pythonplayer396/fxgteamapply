@@ -129,10 +129,29 @@ export default function AdminDashboard() {
 
   const sendDiscordNotification = async (id: string, status: string) => {
     const app = applications.find(a => a.id === id)
-    if (!app || !app.sessionDiscordId) return
+    
+    console.log('Attempting to send Discord notification:', {
+      id,
+      status,
+      hasApp: !!app,
+      hasDiscordId: !!app?.sessionDiscordId,
+      discordId: app?.sessionDiscordId
+    })
+    
+    if (!app) {
+      console.error('Application not found for Discord notification')
+      return
+    }
+    
+    if (!app.sessionDiscordId) {
+      console.error('No Discord ID found for application:', app)
+      showSuccess(`Status updated but no Discord DM sent (missing Discord ID)`)
+      return
+    }
 
     try {
-      await fetch('/api/admin/send-dm', {
+      console.log('Sending DM request to API...')
+      const response = await fetch('/api/admin/send-dm', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -143,8 +162,19 @@ export default function AdminDashboard() {
         }),
         credentials: 'include',
       })
+      
+      const data = await response.json()
+      console.log('DM API response:', data)
+      
+      if (!response.ok) {
+        console.error('Failed to send Discord DM:', data)
+        showSuccess(`Status updated but DM failed: ${data.error}`)
+      } else {
+        console.log('Discord DM sent successfully!')
+      }
     } catch (error) {
       console.error('Error sending Discord notification:', error)
+      showSuccess(`Status updated but DM failed: ${error}`)
     }
   }
 
