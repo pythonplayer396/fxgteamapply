@@ -2,10 +2,11 @@ import { NextResponse } from 'next/server'
 import { v4 as uuidv4 } from 'uuid'
 import { getServerSession } from 'next-auth/next'
 import { addApplication } from '@/lib/storage'
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 
 export async function POST(request: Request) {
   try {
-    const session = await getServerSession()
+    const session = await getServerSession(authOptions)
     const body = await request.json()
     
     console.log('Received helper application:', body)
