@@ -46,37 +46,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-16 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="glass-card p-8 text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-discord-green to-emerald-600 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Users className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-4xl font-bold mb-2">10K+</h3>
-              <p className="text-gray-400">Community Members</p>
-            </div>
-            
-            <div className="glass-card p-8 text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-discord-blurple to-purple-600 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Award className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-4xl font-bold mb-2">500+</h3>
-              <p className="text-gray-400">Giveaways Hosted</p>
-            </div>
-            
-            <div className="glass-card p-8 text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-discord-fuchsia to-pink-600 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Zap className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-4xl font-bold mb-2">24/7</h3>
-              <p className="text-gray-400">Active Support</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Positions Section */}
       <section id="positions" className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
@@ -151,67 +120,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Join Section */}
-      <section className="py-20 px-4 bg-discord-dark/30">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold mb-4">Why Join FxG?</h2>
-            <p className="text-xl text-gray-400">Benefits of being part of our team</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="glass-card p-6 text-center">
-              <div className="w-12 h-12 bg-discord-blurple/20 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Shield className="w-6 h-6 text-discord-blurple" />
-              </div>
-              <h4 className="text-xl font-bold mb-2">Exclusive Perks</h4>
-              <p className="text-gray-400 text-sm">Access to staff-only channels and benefits</p>
-            </div>
-
-            <div className="glass-card p-6 text-center">
-              <div className="w-12 h-12 bg-discord-green/20 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Users className="w-6 h-6 text-discord-green" />
-              </div>
-              <h4 className="text-xl font-bold mb-2">Great Community</h4>
-              <p className="text-gray-400 text-sm">Work with passionate and friendly people</p>
-            </div>
-
-            <div className="glass-card p-6 text-center">
-              <div className="w-12 h-12 bg-discord-fuchsia/20 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Award className="w-6 h-6 text-discord-fuchsia" />
-              </div>
-              <h4 className="text-xl font-bold mb-2">Recognition</h4>
-              <p className="text-gray-400 text-sm">Get recognized for your contributions</p>
-            </div>
-
-            <div className="glass-card p-6 text-center">
-              <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Zap className="w-6 h-6 text-purple-500" />
-              </div>
-              <h4 className="text-xl font-bold mb-2">Growth</h4>
-              <p className="text-gray-400 text-sm">Develop new skills and experience</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="glass-card p-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Join?</h2>
-            <p className="text-xl text-gray-400 mb-8">
-              Start your application today and become part of something amazing.
-            </p>
-            <Link href={session ? "/dashboard" : "/auth/login"}>
-              <button className="btn-primary text-lg px-8 py-4 flex items-center gap-2 mx-auto">
-                {session ? "View Dashboard" : "Sign In to Apply"}
-                <ArrowRight className="w-5 h-5" />
-              </button>
-            </Link>
-          </div>
-        </div>
-      </section>
     </div>
   )
 }
