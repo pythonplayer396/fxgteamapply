@@ -75,7 +75,7 @@ export default function Navbar() {
             ))}
             {session && (
               <button
-                onClick={() => signOut({ callbackUrl: '/auth/login' })}
+                onClick={() => signOut({ callbackUrl: '/', redirect: true })}
                 className="flex items-center gap-2 px-5 py-2.5 rounded-xl hover:bg-red-500/10 transition-all duration-300 text-red-400 hover:text-red-300 font-semibold ml-2"
               >
                 <LogOut className="w-4 h-4" />
@@ -111,7 +111,7 @@ export default function Navbar() {
               <button
                 onClick={() => {
                   setIsOpen(false)
-                  signOut({ callbackUrl: '/auth/login' })
+                  signOut({ callbackUrl: '/', redirect: true })
                 }}
                 className="flex items-center gap-2 px-4 py-3 rounded-lg hover:bg-red-500/20 transition-all duration-300 text-gray-300 hover:text-white w-full"
               >
