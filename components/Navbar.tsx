@@ -1,16 +1,19 @@
 'use client'
 
 import Link from 'next/link'
-import { Menu, X, User, FileText, LogOut } from 'lucide-react'
-import { useState } from 'react'
+import { Menu, X, User, FileText, LogOut, Home } from 'lucide-react'
+import { useState, useEffect } from 'react'
 import { useSession, signOut } from 'next-auth/react'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
   const { data: session } = useSession()
 
   const navLinks = [
-    { href: '/', label: 'Home', icon: <User className="w-4 h-4" /> },
+    { href: '/', label: 'Home', icon: <Home className="w-4 h-4" /> },
     ...(session ? [
       { href: '/dashboard', label: 'Dashboard', icon: <FileText className="w-4 h-4" /> },
       { href: '/dashboard/profile', label: 'Profile', icon: <User className="w-4 h-4" /> },
@@ -18,8 +21,35 @@ export default function Navbar() {
     ] : [])
   ]
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+      
+      // Add background when scrolled
+      setIsScrolled(currentScrollY > 10)
+      
+      // Hide navbar when scrolling down, show when scrolling up
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false)
+      } else {
+        setIsVisible(true)
+      }
+      
+      setLastScrollY(currentScrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [lastScrollY])
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 glass-card mx-4 mt-4 animate-fade-in">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      isVisible ? 'translate-y-0' : '-translate-y-full'
+    } ${
+      isScrolled 
+        ? 'bg-discord-dark/80 backdrop-blur-xl border-b border-white/10' 
+        : 'bg-transparent'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
