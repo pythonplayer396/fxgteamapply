@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { v4 as uuidv4 } from 'uuid'
-import { getServerSession } from 'next-auth'
+import { getServerSession } from 'next-auth/next'
 import { addApplication } from '@/lib/storage'
 
 export async function POST(request: Request) {
@@ -10,6 +10,7 @@ export async function POST(request: Request) {
     
     console.log('Received developer application:', body)
     console.log('Session user:', session?.user)
+    console.log('Session user discordId:', (session?.user as any)?.discordId)
     
     const application = {
       id: uuidv4(),
