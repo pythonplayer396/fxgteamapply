@@ -116,11 +116,35 @@ export default function AdminDashboard() {
           setSelectedApp({ ...selectedApp, status: status as Application['status'] })
         }
         showSuccess(`Status updated to ${status}`)
+        
+        // Send Discord DM notification
+        await sendDiscordNotification(id, status)
       }
     } catch (error) {
       console.error('Error updating status:', error)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const sendDiscordNotification = async (id: string, status: string) => {
+    const app = applications.find(a => a.id === id)
+    if (!app || !app.sessionDiscordId) return
+
+    try {
+      await fetch('/api/admin/send-dm', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          discordId: app.sessionDiscordId,
+          applicantName: app.sessionUsername || app.discordUsername,
+          applicationType: app.type,
+          status: status
+        }),
+        credentials: 'include',
+      })
+    } catch (error) {
+      console.error('Error sending Discord notification:', error)
     }
   }
 
