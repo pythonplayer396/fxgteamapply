@@ -39,15 +39,25 @@ export async function writeDatabase(data: any) {
 
 export async function addApplication(application: any) {
   try {
+    console.log('Attempting to connect to MongoDB...')
     const client = await clientPromise
-    const db = client.db('fxg_applications')
+    console.log('MongoDB client connected successfully')
     
+    const db = client.db('fxg_applications')
     const result = await db.collection('applications').insertOne(application)
     console.log(`Added application with ID: ${result.insertedId}`)
     
     return result.insertedId.toString()
   } catch (error) {
     console.error('Error adding application to MongoDB:', error)
+    console.error('Error details:', error instanceof Error ? error.message : String(error))
+    
+    // Provide more helpful error message
+    if (error instanceof Error) {
+      if (error.message.includes('URI')) {
+        throw new Error('Database connection failed. Please check MongoDB URI configuration.')
+      }
+    }
     throw error
   }
 }
