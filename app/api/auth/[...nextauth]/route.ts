@@ -15,9 +15,18 @@ const handler = NextAuth({
     }),
   ],
   callbacks: {
+    async jwt({ token, account, profile }) {
+      if (account && profile) {
+        token.discordId = (profile as any).id
+        token.picture = (profile as any).image_url || `https://cdn.discordapp.com/avatars/${(profile as any).id}/${(profile as any).avatar}.png`
+      }
+      return token
+    },
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.sub!
+        ;(session.user as any).discordId = token.discordId
+        session.user.image = token.picture as string
       }
       return session
     },

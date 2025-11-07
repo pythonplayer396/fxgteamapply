@@ -14,9 +14,11 @@ export async function POST(request: Request) {
     const application = {
       id: uuidv4(),
       ...body,
-      // Store both the form input and session info for matching
+      // Store Discord session info
       sessionUsername: session?.user?.name || body.discordUsername,
       sessionEmail: session?.user?.email,
+      sessionDiscordId: (session?.user as any)?.discordId,
+      sessionAvatar: session?.user?.image,
       status: 'pending',
       submittedAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
