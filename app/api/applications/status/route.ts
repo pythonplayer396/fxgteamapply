@@ -17,9 +17,15 @@ export async function GET(request: Request) {
     const client = await clientPromise
     const db = client.db('fxg_applications')
     
-    // Filter applications by the logged-in user's Discord username
+    // Filter applications by the logged-in user - check multiple fields
     const userApplications = await db.collection('applications')
-      .find({ discordUsername: session.user.name })
+      .find({
+        $or: [
+          { sessionUsername: session.user.name },
+          { discordUsername: session.user.name },
+          { sessionEmail: session.user.email }
+        ]
+      })
       .toArray()
 
     console.log(`Found ${userApplications.length} applications for user`)

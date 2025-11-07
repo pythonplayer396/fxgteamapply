@@ -1,20 +1,28 @@
 import { NextResponse } from 'next/server'
 import { v4 as uuidv4 } from 'uuid'
+import { getServerSession } from 'next-auth'
 import { addApplication } from '@/lib/storage'
 
 export async function POST(request: Request) {
   try {
+    const session = await getServerSession()
     const body = await request.json()
     
     console.log('Received developer application:', body)
+    console.log('Session user:', session?.user)
     
     const application = {
       id: uuidv4(),
       ...body,
+      // Store both the form input and session info for matching
+      sessionUsername: session?.user?.name || body.discordUsername,
+      sessionEmail: session?.user?.email,
       status: 'pending',
       submittedAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     }
+    
+    console.log('Saving application with data:', application)
     
     await addApplication(application)
     

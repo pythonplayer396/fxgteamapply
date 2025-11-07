@@ -17,11 +17,13 @@ export async function GET() {
     const client = await clientPromise
     const db = client.db('fxg_applications')
     
-    // Filter applications by user (using Discord username or email)
+    // Filter applications by user - check multiple fields
     const userApps = await db.collection('applications')
       .find({
         $or: [
+          { sessionUsername: session.user.name },
           { discordUsername: session.user.name },
+          { sessionEmail: session.user.email },
           { email: session.user.email }
         ]
       })
