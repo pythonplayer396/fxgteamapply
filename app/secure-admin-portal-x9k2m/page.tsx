@@ -288,7 +288,8 @@ export default function AdminDashboard() {
   }
 
   const filtered = applications.filter(app => {
-    const matchesSearch = app.discordUsername.toLowerCase().includes(searchTerm.toLowerCase())
+    const username = app.sessionUsername || app.discordUsername || ''
+    const matchesSearch = username.toLowerCase().includes(searchTerm.toLowerCase())
     if (activeTab === 'all') return matchesSearch
     return matchesSearch && app.status === activeTab
   })
@@ -424,7 +425,7 @@ export default function AdminDashboard() {
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="font-bold text-lg">{app.discordUsername}</h3>
+                  <h3 className="font-bold text-lg">{app.sessionUsername || app.discordUsername || 'Unknown'}</h3>
                   <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
                     app.status === 'pending' ? 'bg-yellow-500/20 text-yellow-500' :
                     app.status === 'interview' ? 'bg-blue-500/20 text-blue-500' :
@@ -436,7 +437,7 @@ export default function AdminDashboard() {
                   </span>
                 </div>
                 <p className="text-gray-400 text-sm">Type: {app.type}</p>
-                <p className="text-gray-400 text-sm">ID: {app.discordId}</p>
+                <p className="text-gray-400 text-sm">ID: {app.sessionDiscordId || app.discordId || 'N/A'}</p>
                 <p className="text-gray-400 text-xs mt-2">
                   {new Date(app.submittedAt).toLocaleString()}
                 </p>
