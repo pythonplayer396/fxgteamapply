@@ -10,31 +10,32 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-4 overflow-hidden">
+      <section className="relative pt-40 pb-32 px-4 overflow-hidden">
         {/* Animated Background */}
         <div className="absolute inset-0 -z-10">
-          <div className="absolute top-20 left-10 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-50 animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-100 rounded-full blur-3xl opacity-50 animate-pulse" style={{animationDelay: '1s'}}></div>
+          <div className="absolute top-20 left-10 w-[600px] h-[600px] bg-purple-600/20 rounded-full blur-[120px] animate-pulse"></div>
+          <div className="absolute bottom-20 right-10 w-[600px] h-[600px] bg-pink-600/20 rounded-full blur-[120px] animate-pulse" style={{animationDelay: '1s'}}></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-purple-500/10 rounded-full blur-[150px]"></div>
         </div>
 
-        <div className="max-w-5xl mx-auto text-center animate-fade-in">
-          <div className="inline-block mb-8 px-6 py-2 bg-gradient-to-r from-blue-50 to-purple-50 rounded-full border border-blue-200">
-            <span className="text-blue-600 font-semibold text-sm">Now Accepting Applications</span>
+        <div className="max-w-6xl mx-auto text-center animate-fade-in">
+          <div className="inline-block mb-8 px-6 py-2 bg-white/5 backdrop-blur-xl rounded-full border border-white/10">
+            <span className="text-purple-400 font-semibold text-sm">✨ Now Hiring</span>
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+          <h1 className="text-6xl md:text-8xl font-black mb-8 leading-none">
             Join <span className="gradient-text">FxG</span>
           </h1>
           
-          <p className="text-lg md:text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
-            Apply to become part of our team
+          <p className="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto font-light">
+            Become part of something extraordinary
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link href={session ? "/dashboard" : "/auth/login"}>
-              <button className="btn-primary ripple-effect text-lg flex items-center gap-2 mx-auto">
+              <button className="btn-primary text-lg flex items-center gap-3 mx-auto group">
                 {session ? "Dashboard" : "Apply Now"}
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </Link>
           </div>
@@ -42,45 +43,57 @@ export default function Home() {
       </section>
 
       {/* Positions Section */}
-      <section id="positions" className="py-20 px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold mb-3">Positions</h2>
-            <p className="text-gray-600">Choose your role</p>
+      <section id="positions" className="py-32 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-20 animate-fade-in">
+            <h2 className="text-5xl md:text-6xl font-black mb-4">Open Roles</h2>
+            <p className="text-gray-500 text-lg">Pick your path</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Helper Position */}
-            <div className="glass-card group hover:scale-105 cursor-pointer animate-fade-in">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-2xl flex items-center justify-center mb-4 group-hover:rotate-6 transition-transform duration-300">
-                <Users className="w-8 h-8 text-white" />
-              </div>
-              
-              <h3 className="text-2xl font-bold mb-3">Helper</h3>
-              <p className="text-gray-600 mb-6">
-                Support community members
-              </p>
+            <Link href={session ? "/dashboard/applications/helper" : "/auth/login"}>
+              <div className="glass-card group hover:scale-[1.02] cursor-pointer animate-fade-in relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+                
+                <div className="relative">
+                  <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-3xl flex items-center justify-center mb-6 group-hover:rotate-12 transition-all duration-500 shadow-lg shadow-green-500/50">
+                    <Users className="w-10 h-10 text-white" />
+                  </div>
+                  
+                  <h3 className="text-3xl font-black mb-4">Helper</h3>
+                  <p className="text-gray-400 text-lg mb-8">
+                    Support and assist our community
+                  </p>
 
-              <Link href={session ? "/dashboard/applications/helper" : "/auth/login"}>
-                <button className="btn-primary w-full ripple-effect">Apply</button>
-              </Link>
-            </div>
+                  <div className="flex items-center text-purple-400 font-semibold group-hover:translate-x-2 transition-transform">
+                    Apply Now <ArrowRight className="w-5 h-5 ml-2" />
+                  </div>
+                </div>
+              </div>
+            </Link>
 
             {/* Developer Position */}
-            <div className="glass-card group hover:scale-105 cursor-pointer animate-fade-in" style={{animationDelay: '0.1s'}}>
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-4 group-hover:rotate-6 transition-transform duration-300">
-                <Code className="w-8 h-8 text-white" />
-              </div>
-              
-              <h3 className="text-2xl font-bold mb-3">Developer</h3>
-              <p className="text-gray-600 mb-6">
-                Build Discord features
-              </p>
+            <Link href={session ? "/dashboard/applications/developer" : "/auth/login"}>
+              <div className="glass-card group hover:scale-[1.02] cursor-pointer animate-fade-in relative overflow-hidden" style={{animationDelay: '0.1s'}}>
+                <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+                
+                <div className="relative">
+                  <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 rounded-3xl flex items-center justify-center mb-6 group-hover:rotate-12 transition-all duration-500 shadow-lg shadow-purple-500/50">
+                    <Code className="w-10 h-10 text-white" />
+                  </div>
+                  
+                  <h3 className="text-3xl font-black mb-4">Developer</h3>
+                  <p className="text-gray-400 text-lg mb-8">
+                    Build and create amazing features
+                  </p>
 
-              <Link href={session ? "/dashboard/applications/developer" : "/auth/login"}>
-                <button className="btn-primary w-full ripple-effect">Apply</button>
-              </Link>
-            </div>
+                  <div className="flex items-center text-purple-400 font-semibold group-hover:translate-x-2 transition-transform">
+                    Apply Now <ArrowRight className="w-5 h-5 ml-2" />
+                  </div>
+                </div>
+              </div>
+            </Link>
           </div>
         </div>
       </section>

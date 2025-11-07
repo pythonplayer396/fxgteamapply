@@ -47,28 +47,28 @@ export default function Navbar() {
       isVisible ? 'translate-y-0' : '-translate-y-full'
     } ${
       isScrolled 
-        ? 'bg-white/90 backdrop-blur-xl border-b border-gray-200 shadow-sm' 
+        ? 'bg-[#0a0a0a]/80 backdrop-blur-2xl border-b border-white/10' 
         : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-              <span className="text-white font-bold text-xl">F</span>
+          <Link href="/" className="flex items-center space-x-3 group">
+            <div className="w-11 h-11 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg shadow-purple-500/50">
+              <span className="text-white font-black text-xl">F</span>
             </div>
-            <span className="text-xl font-bold hidden sm:block gradient-text">
+            <span className="text-2xl font-black hidden sm:block gradient-text">
               FxG
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-2">
+          <div className="hidden md:flex items-center space-x-1">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="flex items-center gap-2 px-4 py-2 rounded-full hover:bg-gray-100 transition-all duration-300 text-gray-700 hover:text-gray-900 font-medium"
+                className="px-5 py-2.5 rounded-xl hover:bg-white/5 transition-all duration-300 text-gray-300 hover:text-white font-semibold"
               >
                 {link.label}
               </Link>
@@ -76,7 +76,7 @@ export default function Navbar() {
             {session && (
               <button
                 onClick={() => signOut({ callbackUrl: '/auth/login' })}
-                className="flex items-center gap-2 px-4 py-2 rounded-full hover:bg-red-50 transition-all duration-300 text-red-600 hover:text-red-700 font-medium"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-xl hover:bg-red-500/10 transition-all duration-300 text-red-400 hover:text-red-300 font-semibold ml-2"
               >
                 <LogOut className="w-4 h-4" />
                 Sign Out
@@ -87,9 +87,9 @@ export default function Navbar() {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            className="md:hidden p-2 rounded-xl hover:bg-white/5 transition-colors"
           >
-            {isOpen ? <X className="w-6 h-6 text-gray-700" /> : <Menu className="w-6 h-6 text-gray-700" />}
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
 
