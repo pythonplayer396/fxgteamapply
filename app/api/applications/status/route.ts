@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
-import { getStore } from '@netlify/blobs'
+import clientPromise from '@/lib/mongodb'
 
 export const dynamic = 'force-dynamic'
 
@@ -12,14 +12,17 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const store = getStore('applications')
-    const data = await store.get('all', { type: 'json' })
-    const db = data || { applications: [] }
-
+    console.log('Fetching applications for user:', session.user.name)
+    
+    const client = await clientPromise
+    const db = client.db('fxg_applications')
+    
     // Filter applications by the logged-in user's Discord username
-    const userApplications = db.applications.filter(
-      (app: any) => app.discordUsername === session.user.name
-    )
+    const userApplications = await db.collection('applications')
+      .find({ discordUsername: session.user.name })
+      .toArray()
+
+    console.log(`Found ${userApplications.length} applications for user`)
 
     // Return only necessary fields
     const sanitizedApps = userApplications.map((app: any) => ({

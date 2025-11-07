@@ -1,9 +1,8 @@
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
-import fs from 'fs/promises'
-import path from 'path'
+import clientPromise from '@/lib/mongodb'
 
-const DB_FILE = path.join(process.cwd(), 'data', 'applications.json')
+export const dynamic = 'force-dynamic'
 
 export async function GET() {
   try {
@@ -13,17 +12,26 @@ export async function GET() {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const data = await fs.readFile(DB_FILE, 'utf8')
-    const db = JSON.parse(data)
+    console.log('Fetching user applications for:', session.user.name)
+    
+    const client = await clientPromise
+    const db = client.db('fxg_applications')
     
     // Filter applications by user (using Discord username or email)
-    const userApps = db.filter((app: any) => 
-      app.discordUsername === session.user.name || 
-      app.email === session.user.email
-    )
+    const userApps = await db.collection('applications')
+      .find({
+        $or: [
+          { discordUsername: session.user.name },
+          { email: session.user.email }
+        ]
+      })
+      .toArray()
+
+    console.log(`Found ${userApps.length} applications`)
 
     return NextResponse.json(userApps)
   } catch (error) {
+    console.error('Error fetching user applications:', error)
     return NextResponse.json([])
   }
 }
