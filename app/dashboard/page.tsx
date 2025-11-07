@@ -8,144 +8,88 @@ export default function DashboardHome() {
   const { data: session } = useSession()
 
   return (
-    <div className="min-h-screen pt-24 pb-12 px-4">
+    <div className="min-h-screen pt-32 pb-12 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Welcome Header */}
-        <div className="mb-12">
-          <h1 className="text-5xl font-bold mb-4">
+        <div className="mb-16 text-center">
+          <h1 className="text-5xl md:text-6xl font-black mb-3">
             Welcome back, <span className="gradient-text">{session?.user?.name || 'User'}</span>
           </h1>
-          <p className="text-xl text-gray-400">Ready to start your application journey?</p>
         </div>
 
         {/* Quick Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-20 max-w-4xl mx-auto">
           <Link href="/dashboard/profile">
-            <div className="glass-card p-6 hover:border-discord-blurple transition-all cursor-pointer group">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-discord-blurple/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <User className="w-6 h-6 text-discord-blurple" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-lg">Profile</h3>
-                  <p className="text-sm text-gray-400">View your info</p>
-                </div>
-              </div>
+            <div className="glass-card p-5 hover:scale-105 transition-all cursor-pointer group text-center">
+              <User className="w-8 h-8 text-purple-400 mx-auto mb-2" />
+              <h3 className="font-bold">Profile</h3>
             </div>
           </Link>
 
           <Link href="/dashboard/status">
-            <div className="glass-card p-6 hover:border-discord-green transition-all cursor-pointer group">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-discord-green/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <FileText className="w-6 h-6 text-discord-green" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-lg">Applications</h3>
-                  <p className="text-sm text-gray-400">Track status</p>
-                </div>
-              </div>
+            <div className="glass-card p-5 hover:scale-105 transition-all cursor-pointer group text-center">
+              <FileText className="w-8 h-8 text-purple-400 mx-auto mb-2" />
+              <h3 className="font-bold">Applications</h3>
             </div>
           </Link>
 
           <a href="/">
-            <div className="glass-card p-6 hover:border-discord-fuchsia transition-all cursor-pointer group">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-discord-fuchsia/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <ArrowRight className="w-6 h-6 text-discord-fuchsia" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-lg">Home</h3>
-                  <p className="text-sm text-gray-400">Back to main</p>
-                </div>
-              </div>
+            <div className="glass-card p-5 hover:scale-105 transition-all cursor-pointer group text-center">
+              <ArrowRight className="w-8 h-8 text-purple-400 mx-auto mb-2" />
+              <h3 className="font-bold">Home</h3>
             </div>
           </a>
         </div>
 
         {/* Application Options */}
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold mb-6">Available Positions</h2>
+        <div className="mb-10 text-center">
+          <h2 className="text-4xl font-black">Available Positions</h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {/* Helper Application */}
-          <div className="glass-card p-8 hover:border-discord-green transition-all group">
-            <div className="flex items-start gap-6 mb-6">
-              <div className="w-20 h-20 bg-gradient-to-br from-discord-green to-emerald-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                <Users className="w-10 h-10 text-white" />
-              </div>
-              <div>
-                <h2 className="text-3xl font-bold mb-2">Helper</h2>
-                <p className="text-gray-400">Join our support team and help community members</p>
+          <Link href="/dashboard/applications/helper">
+            <div className="glass-card p-8 hover:scale-[1.02] transition-all group cursor-pointer relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+              
+              <div className="relative">
+                <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-3xl flex items-center justify-center mb-6 group-hover:rotate-12 transition-all duration-500 shadow-lg shadow-green-500/50">
+                  <Users className="w-10 h-10 text-white" />
+                </div>
+                
+                <h2 className="text-3xl font-black mb-4">Helper</h2>
+                <p className="text-gray-400 text-lg mb-8">
+                  Support our community
+                </p>
+
+                <div className="flex items-center text-purple-400 font-semibold group-hover:translate-x-2 transition-transform">
+                  Apply Now <ArrowRight className="w-5 h-5 ml-2" />
+                </div>
               </div>
             </div>
-
-            <div className="space-y-3 mb-6">
-              <div className="flex items-start gap-2">
-                <CheckCircle className="w-5 h-5 text-discord-green mt-0.5 flex-shrink-0" />
-                <span className="text-gray-300 text-sm">Assist members with questions and issues</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <CheckCircle className="w-5 h-5 text-discord-green mt-0.5 flex-shrink-0" />
-                <span className="text-gray-300 text-sm">Moderate chat and enforce community rules</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <CheckCircle className="w-5 h-5 text-discord-green mt-0.5 flex-shrink-0" />
-                <span className="text-gray-300 text-sm">Help organize and run community events</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <CheckCircle className="w-5 h-5 text-discord-green mt-0.5 flex-shrink-0" />
-                <span className="text-gray-300 text-sm">Be active and friendly in the community</span>
-              </div>
-            </div>
-
-            <Link href="/dashboard/applications/helper">
-              <button className="btn-primary w-full flex items-center justify-center gap-2">
-                Apply for Helper
-                <ArrowRight className="w-5 h-5" />
-              </button>
-            </Link>
-          </div>
+          </Link>
 
           {/* Developer Application */}
-          <div className="glass-card p-8 hover:border-discord-blurple transition-all group">
-            <div className="flex items-start gap-6 mb-6">
-              <div className="w-20 h-20 bg-gradient-to-br from-discord-blurple to-purple-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                <Code className="w-10 h-10 text-white" />
-              </div>
-              <div>
-                <h2 className="text-3xl font-bold mb-2">Developer</h2>
-                <p className="text-gray-400">Build and maintain our Discord infrastructure</p>
+          <Link href="/dashboard/applications/developer">
+            <div className="glass-card p-8 hover:scale-[1.02] transition-all group cursor-pointer relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+              
+              <div className="relative">
+                <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 rounded-3xl flex items-center justify-center mb-6 group-hover:rotate-12 transition-all duration-500 shadow-lg shadow-purple-500/50">
+                  <Code className="w-10 h-10 text-white" />
+                </div>
+                
+                <h2 className="text-3xl font-black mb-4">Developer</h2>
+                <p className="text-gray-400 text-lg mb-8">
+                  Build amazing features
+                </p>
+
+                <div className="flex items-center text-purple-400 font-semibold group-hover:translate-x-2 transition-transform">
+                  Apply Now <ArrowRight className="w-5 h-5 ml-2" />
+                </div>
               </div>
             </div>
-
-            <div className="space-y-3 mb-6">
-              <div className="flex items-start gap-2">
-                <CheckCircle className="w-5 h-5 text-discord-blurple mt-0.5 flex-shrink-0" />
-                <span className="text-gray-300 text-sm">Develop Discord bots and custom features</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <CheckCircle className="w-5 h-5 text-discord-blurple mt-0.5 flex-shrink-0" />
-                <span className="text-gray-300 text-sm">Maintain and optimize existing codebase</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <CheckCircle className="w-5 h-5 text-discord-blurple mt-0.5 flex-shrink-0" />
-                <span className="text-gray-300 text-sm">Collaborate on innovative new projects</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <CheckCircle className="w-5 h-5 text-discord-blurple mt-0.5 flex-shrink-0" />
-                <span className="text-gray-300 text-sm">Experience with JavaScript/TypeScript preferred</span>
-              </div>
-            </div>
-
-            <Link href="/dashboard/applications/developer">
-              <button className="btn-primary w-full flex items-center justify-center gap-2">
-                Apply for Developer
-                <ArrowRight className="w-5 h-5" />
-              </button>
-            </Link>
-          </div>
+          </Link>
         </div>
       </div>
     </div>
