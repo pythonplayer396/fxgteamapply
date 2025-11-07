@@ -9,6 +9,7 @@ export default function HelperApplicationPage() {
   const { data: session } = useSession()
   const [submitted, setSubmitted] = useState(false)
   const [formData, setFormData] = useState({
+    discordId: '',
     age: '',
     experience: '',
     reason: '',
@@ -91,13 +92,29 @@ export default function HelperApplicationPage() {
         </div>
 
         <form onSubmit={handleSubmit} className="bg-discord-dark border border-white/10 rounded-lg p-8 space-y-6">
-            {/* Discord info auto-filled from session */}
+            {/* Discord info */}
             <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 mb-6">
               <p className="text-sm text-gray-300 mb-2">
                 <span className="font-semibold text-purple-400">Logged in as:</span> {session?.user?.name}
               </p>
-              <p className="text-xs text-gray-400">
-                Your Discord information will be automatically included with this application
+            </div>
+
+            <div>
+              <label htmlFor="discordId" className="block text-sm font-semibold mb-2">
+                Discord User ID <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                id="discordId"
+                name="discordId"
+                required
+                value={formData.discordId}
+                onChange={handleChange}
+                placeholder="123456789012345678"
+                className="input-field"
+              />
+              <p className="text-xs text-gray-400 mt-1">
+                Right-click your profile in Discord → Copy User ID (Developer Mode must be enabled)
               </p>
             </div>
 

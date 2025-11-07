@@ -17,9 +17,9 @@ export async function POST(request: Request) {
       id: uuidv4(),
       ...body,
       // Store Discord session info
-      sessionUsername: session?.user?.name || body.discordUsername,
+      sessionUsername: session?.user?.name,
       sessionEmail: session?.user?.email,
-      sessionDiscordId: (session?.user as any)?.discordId,
+      sessionDiscordId: body.discordId, // Use the manually entered Discord ID
       sessionAvatar: session?.user?.image,
       status: 'pending',
       submittedAt: new Date().toISOString(),
