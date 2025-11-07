@@ -522,7 +522,7 @@ export default function AdminDashboard() {
                       className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <CheckCircle className="w-5 h-5" />
-                      Move to Interview
+                      Take for Interview
                     </button>
                     <button
                       onClick={() => updateStatus(selectedApp.id, 'denied')}
@@ -530,7 +530,7 @@ export default function AdminDashboard() {
                       className="bg-red-500 hover:bg-red-600 w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <XCircle className="w-5 h-5" />
-                      Deny Application
+                      Decline Application
                     </button>
                   </>
                 )}
@@ -542,20 +542,20 @@ export default function AdminDashboard() {
                       className="bg-green-500 hover:bg-green-600 w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <CheckCircle className="w-5 h-5" />
-                      Approve (Interview Passed)
+                      Approve Application
                     </button>
                     <button
-                      onClick={() => updateStatus(selectedApp.id, 'interview_failed')}
+                      onClick={() => updateStatus(selectedApp.id, 'denied')}
                       disabled={loading}
-                      className="bg-orange-500 hover:bg-orange-600 w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="bg-red-500 hover:bg-red-600 w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <XCircle className="w-5 h-5" />
-                      Interview Failed
+                      Decline Application
                     </button>
                   </>
                 )}
-                {(selectedApp.status === 'approved' || selectedApp.status === 'denied' || selectedApp.status === 'interview_failed') && (
-                  <p className="text-gray-400 text-center py-4">Application {selectedApp.status.replace('_', ' ')}</p>
+                {(selectedApp.status === 'approved' || selectedApp.status === 'denied') && (
+                  <p className="text-gray-400 text-center py-4">Application {selectedApp.status}</p>
                 )}
                 <button
                   onClick={() => deleteApplication(selectedApp.id)}
