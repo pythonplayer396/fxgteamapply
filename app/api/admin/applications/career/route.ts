@@ -6,12 +6,25 @@ export async function GET() {
     const data = await readDatabase()
     const allApplications = data.applications || []
     
+    console.log('Total applications in database:', allApplications.length)
+    console.log('Sample application types:', allApplications.slice(0, 3).map((app: any) => ({
+      type: app.type,
+      applicationType: app.applicationType,
+      careerType: app.careerType
+    })))
+    
     // Filter for career applications only
     const careerApplications = allApplications.filter(
       (app: any) => app.applicationType === 'career' || app.careerType
     )
     
-    console.log('Fetched career applications:', careerApplications.length)
+    console.log('Filtered career applications:', careerApplications.length)
+    console.log('Career apps:', careerApplications.map((app: any) => ({
+      id: app.id,
+      type: app.type,
+      applicationType: app.applicationType,
+      careerType: app.careerType
+    })))
     
     return NextResponse.json(careerApplications)
   } catch (error) {
