@@ -2,7 +2,7 @@
 
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
-import { CheckCircle, XCircle, Clock, AlertCircle, FileText } from 'lucide-react'
+import { CheckCircle, XCircle, Clock, AlertCircle, FileText, Eye, X } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
 interface Application {
@@ -12,6 +12,8 @@ interface Application {
   discordUsername: string
   submittedAt: string
   updatedAt: string
+  // Application form fields
+  [key: string]: any
 }
 // FDFD
 export default function ApplicationStatus() {
@@ -19,6 +21,7 @@ export default function ApplicationStatus() {
   const router = useRouter()
   const [applications, setApplications] = useState<Application[]>([])
   const [loading, setLoading] = useState(true)
+  const [selectedApp, setSelectedApp] = useState<Application | null>(null)
 
   useEffect(() => {
     if (status === 'authenticated' && session?.user) {
@@ -142,15 +145,24 @@ export default function ApplicationStatus() {
                     <p className="text-gray-300 mb-4">
                       {getStatusDescription(app.status)}
                     </p>
-                    <div className="flex gap-6 text-sm text-gray-400">
-                      <div>
-                        <span className="font-semibold">Submitted:</span>{' '}
-                        {new Date(app.submittedAt).toLocaleDateString()}
+                    <div className="flex items-center justify-between">
+                      <div className="flex gap-6 text-sm text-gray-400">
+                        <div>
+                          <span className="font-semibold">Submitted:</span>{' '}
+                          {new Date(app.submittedAt).toLocaleDateString()}
+                        </div>
+                        <div>
+                          <span className="font-semibold">Last Updated:</span>{' '}
+                          {new Date(app.updatedAt).toLocaleDateString()}
+                        </div>
                       </div>
-                      <div>
-                        <span className="font-semibold">Last Updated:</span>{' '}
-                        {new Date(app.updatedAt).toLocaleDateString()}
-                      </div>
+                      <button
+                        onClick={() => setSelectedApp(app)}
+                        className="flex items-center gap-2 px-4 py-2 bg-discord-blurple hover:bg-discord-blurple/80 rounded-lg transition-colors"
+                      >
+                        <Eye className="w-4 h-4" />
+                        View Details
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -159,6 +171,155 @@ export default function ApplicationStatus() {
           </div>
         )}
       </div>
+
+      {/* Application Details Modal */}
+      {selectedApp && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+          <div className="bg-discord-dark border border-white/10 rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+            <div className="flex items-center justify-between p-6 border-b border-white/10">
+              <h2 className="text-2xl font-bold capitalize">{selectedApp.type} Application Details</h2>
+              <button
+                onClick={() => setSelectedApp(null)}
+                className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            
+            <div className="p-6 space-y-4">
+              {/* Status */}
+              <div className="flex items-center gap-3 mb-6">
+                {getStatusIcon(selectedApp.status)}
+                <div>
+                  <div className="text-lg font-semibold">{getStatusText(selectedApp.status)}</div>
+                  <div className="text-gray-400 text-sm">{getStatusDescription(selectedApp.status)}</div>
+                </div>
+              </div>
+
+              {/* Application Fields */}
+              <div className="grid gap-4">
+                {selectedApp.type === 'helper' ? (
+                  <>
+                    {selectedApp.age && (
+                      <div>
+                        <label className="block text-sm font-semibold mb-1">Age</label>
+                        <div className="bg-black/20 p-3 rounded-lg">{selectedApp.age}</div>
+                      </div>
+                    )}
+                    {selectedApp.previousExperience && (
+                      <div>
+                        <label className="block text-sm font-semibold mb-1">Previous Experience</label>
+                        <div className="bg-black/20 p-3 rounded-lg whitespace-pre-wrap">{selectedApp.previousExperience}</div>
+                      </div>
+                    )}
+                    {selectedApp.whyHelper && (
+                      <div>
+                        <label className="block text-sm font-semibold mb-1">Why do you want to be a Helper?</label>
+                        <div className="bg-black/20 p-3 rounded-lg whitespace-pre-wrap">{selectedApp.whyHelper}</div>
+                      </div>
+                    )}
+                    {selectedApp.availability && (
+                      <div>
+                        <label className="block text-sm font-semibold mb-1">Availability</label>
+                        <div className="bg-black/20 p-3 rounded-lg whitespace-pre-wrap">{selectedApp.availability}</div>
+                      </div>
+                    )}
+                    {selectedApp.contactInfo && (
+                      <div>
+                        <label className="block text-sm font-semibold mb-1">Contact Information</label>
+                        <div className="bg-black/20 p-3 rounded-lg">{selectedApp.contactInfo}</div>
+                      </div>
+                    )}
+                    {selectedApp.additionalInfo && (
+                      <div>
+                        <label className="block text-sm font-semibold mb-1">Additional Information</label>
+                        <div className="bg-black/20 p-3 rounded-lg whitespace-pre-wrap">{selectedApp.additionalInfo}</div>
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    {selectedApp.programmingExperience && (
+                      <div>
+                        <label className="block text-sm font-semibold mb-1">Programming Experience</label>
+                        <div className="bg-black/20 p-3 rounded-lg whitespace-pre-wrap">{selectedApp.programmingExperience}</div>
+                      </div>
+                    )}
+                    {selectedApp.languages && (
+                      <div>
+                        <label className="block text-sm font-semibold mb-1">Programming Languages</label>
+                        <div className="bg-black/20 p-3 rounded-lg">{selectedApp.languages}</div>
+                      </div>
+                    )}
+                    {selectedApp.frameworks && (
+                      <div>
+                        <label className="block text-sm font-semibold mb-1">Frameworks & Technologies</label>
+                        <div className="bg-black/20 p-3 rounded-lg">{selectedApp.frameworks}</div>
+                      </div>
+                    )}
+                    {selectedApp.portfolio && (
+                      <div>
+                        <label className="block text-sm font-semibold mb-1">Portfolio/Projects</label>
+                        <div className="bg-black/20 p-3 rounded-lg">{selectedApp.portfolio}</div>
+                      </div>
+                    )}
+                    {selectedApp.github && (
+                      <div>
+                        <label className="block text-sm font-semibold mb-1">GitHub Profile</label>
+                        <div className="bg-black/20 p-3 rounded-lg">
+                          <a href={selectedApp.github} target="_blank" rel="noopener noreferrer" className="text-discord-blurple hover:underline">
+                            {selectedApp.github}
+                          </a>
+                        </div>
+                      </div>
+                    )}
+                    {selectedApp.reason && (
+                      <div>
+                        <label className="block text-sm font-semibold mb-1">Why do you want to be a Developer?</label>
+                        <div className="bg-black/20 p-3 rounded-lg whitespace-pre-wrap">{selectedApp.reason}</div>
+                      </div>
+                    )}
+                    {selectedApp.contactInfo && (
+                      <div>
+                        <label className="block text-sm font-semibold mb-1">Contact Information</label>
+                        <div className="bg-black/20 p-3 rounded-lg">{selectedApp.contactInfo}</div>
+                      </div>
+                    )}
+                    {selectedApp.additionalInfo && (
+                      <div>
+                        <label className="block text-sm font-semibold mb-1">Additional Information</label>
+                        <div className="bg-black/20 p-3 rounded-lg whitespace-pre-wrap">{selectedApp.additionalInfo}</div>
+                      </div>
+                    )}
+                  </>
+                )}
+
+                {/* Discord ID */}
+                {selectedApp.discordId && (
+                  <div>
+                    <label className="block text-sm font-semibold mb-1">Discord ID</label>
+                    <div className="bg-black/20 p-3 rounded-lg font-mono">{selectedApp.discordId}</div>
+                  </div>
+                )}
+
+                {/* Submission Info */}
+                <div className="border-t border-white/10 pt-4 mt-6">
+                  <div className="grid grid-cols-2 gap-4 text-sm">
+                    <div>
+                      <label className="block font-semibold mb-1">Submitted</label>
+                      <div className="text-gray-400">{new Date(selectedApp.submittedAt).toLocaleString()}</div>
+                    </div>
+                    <div>
+                      <label className="block font-semibold mb-1">Last Updated</label>
+                      <div className="text-gray-400">{new Date(selectedApp.updatedAt).toLocaleString()}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
