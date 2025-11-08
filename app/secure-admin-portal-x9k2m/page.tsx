@@ -181,7 +181,8 @@ export default function AdminDashboard() {
       status,
       hasApp: !!app,
       hasDiscordId: !!app?.sessionDiscordId,
-      discordId: app?.sessionDiscordId
+      discordId: app?.sessionDiscordId,
+      isCareer: app?.careerType === 'slayer' || app?.careerType === 'dungeon'
     })
     
     if (!app) {
@@ -195,15 +196,21 @@ export default function AdminDashboard() {
       return
     }
 
+    const isCareerApp = app.careerType === 'slayer' || app.careerType === 'dungeon'
+
     try {
       console.log('Sending DM request to API...')
-      const response = await fetch('/api/admin/send-dm', {
+      
+      // Use different endpoint for career applications
+      const endpoint = isCareerApp ? '/api/admin/send-career-dm' : '/api/admin/send-dm'
+      
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           discordId: app.sessionDiscordId,
           applicantName: app.sessionUsername || app.discordUsername,
-          applicationType: app.type,
+          applicationType: app.careerType || app.type,
           status: status
         }),
         credentials: 'include',
@@ -636,7 +643,30 @@ export default function AdminDashboard() {
                 </div>
               </div>
               <div className="space-y-2">
-                {selectedApp.status === 'pending' && (
+                {/* Career applications (Slayer/Dungeon) - No interview */}
+                {(selectedApp.careerType === 'slayer' || selectedApp.careerType === 'dungeon') && selectedApp.status === 'pending' && (
+                  <>
+                    <button
+                      onClick={() => updateStatus(selectedApp.id, 'approved')}
+                      disabled={loading}
+                      className="bg-green-500 hover:bg-green-600 w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <CheckCircle className="w-5 h-5" />
+                      Accept
+                    </button>
+                    <button
+                      onClick={() => updateStatus(selectedApp.id, 'denied')}
+                      disabled={loading}
+                      className="bg-red-500 hover:bg-red-600 w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <XCircle className="w-5 h-5" />
+                      Decline
+                    </button>
+                  </>
+                )}
+
+                {/* Staff applications (Helper/Developer) - With interview */}
+                {!(selectedApp.careerType === 'slayer' || selectedApp.careerType === 'dungeon') && selectedApp.status === 'pending' && (
                   <>
                     <button
                       onClick={() => updateStatus(selectedApp.id, 'interview')}
@@ -656,6 +686,7 @@ export default function AdminDashboard() {
                     </button>
                   </>
                 )}
+                
                 {selectedApp.status === 'interview' && (
                   <>
                     <button
