@@ -7,6 +7,8 @@ import { getAdminToken, setAdminToken, clearAdminToken } from '@/lib/adminAuth'
 interface Application {
   id: string
   type: string
+  applicationType?: string
+  careerType?: string
   discordUsername: string
   discordId: string
   status: 'pending' | 'interview' | 'approved' | 'denied' | 'interview_failed'
@@ -22,6 +24,7 @@ export default function AdminDashboard() {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedApp, setSelectedApp] = useState<Application | null>(null)
   const [activeTab, setActiveTab] = useState<'all' | 'pending' | 'interview' | 'approved' | 'denied' | 'interview_failed'>('all')
+  const [categoryFilter, setCategoryFilter] = useState<'all' | 'helper' | 'developer' | 'slayer' | 'dungeon'>('all')
   const [loginError, setLoginError] = useState('')
   const [loading, setLoading] = useState(false)
   const [successMessage, setSuccessMessage] = useState('')
@@ -122,6 +125,49 @@ export default function AdminDashboard() {
       }
     } catch (error) {
       console.error('Error updating status:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const updateCategory = async (id: string, category: string) => {
+    setLoading(true)
+    try {
+      const response = await fetch('/api/admin/applications', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          id, 
+          type: category === 'helper' || category === 'developer' ? category : undefined,
+          careerType: category === 'slayer' || category === 'dungeon' ? category : undefined,
+          applicationType: category === 'slayer' || category === 'dungeon' ? 'career' : undefined
+        }),
+        credentials: 'include',
+      })
+      
+      if (response.ok) {
+        // Update locally for instant feedback
+        setApplications(prev => prev.map(app => {
+          if (app.id === id) {
+            if (category === 'helper' || category === 'developer') {
+              return { ...app, type: category, applicationType: undefined, careerType: undefined }
+            } else {
+              return { ...app, type: category, applicationType: 'career', careerType: category }
+            }
+          }
+          return app
+        }))
+        if (selectedApp?.id === id) {
+          if (category === 'helper' || category === 'developer') {
+            setSelectedApp({ ...selectedApp, type: category, applicationType: undefined, careerType: undefined })
+          } else {
+            setSelectedApp({ ...selectedApp, type: category, applicationType: 'career', careerType: category })
+          }
+        }
+        showSuccess(`Category updated to ${category}`)
+      }
+    } catch (error) {
+      console.error('Error updating category:', error)
     } finally {
       setLoading(false)
     }
@@ -285,13 +331,27 @@ export default function AdminDashboard() {
     approved: applications.filter(a => a.status === 'approved').length,
     denied: applications.filter(a => a.status === 'denied').length,
     interviewFailed: applications.filter(a => a.status === 'interview_failed').length,
+    helper: applications.filter(a => a.type === 'helper').length,
+    developer: applications.filter(a => a.type === 'developer').length,
+    slayer: applications.filter(a => a.careerType === 'slayer').length,
+    dungeon: applications.filter(a => a.careerType === 'dungeon').length,
   }
 
   const filtered = applications.filter(app => {
     const username = app.sessionUsername || app.discordUsername || ''
     const matchesSearch = username.toLowerCase().includes(searchTerm.toLowerCase())
-    if (activeTab === 'all') return matchesSearch
-    return matchesSearch && app.status === activeTab
+    
+    // Filter by status
+    const matchesStatus = activeTab === 'all' || app.status === activeTab
+    
+    // Filter by category
+    let matchesCategory = true
+    if (categoryFilter === 'helper') matchesCategory = app.type === 'helper'
+    else if (categoryFilter === 'developer') matchesCategory = app.type === 'developer'
+    else if (categoryFilter === 'slayer') matchesCategory = app.careerType === 'slayer'
+    else if (categoryFilter === 'dungeon') matchesCategory = app.careerType === 'dungeon'
+    
+    return matchesSearch && matchesStatus && matchesCategory
   })
 
   return (
@@ -385,6 +445,53 @@ export default function AdminDashboard() {
           </button>
         </div>
 
+        {/* Category Filter */}
+        <div className="mb-6">
+          <p className="text-sm text-gray-400 mb-3 font-semibold">Filter by Category:</p>
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={() => setCategoryFilter('all')}
+              className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                categoryFilter === 'all' ? 'bg-purple-500 text-white' : 'bg-discord-dark border border-white/10 hover:border-purple-500/50'
+              }`}
+            >
+              All ({stats.total})
+            </button>
+            <button
+              onClick={() => setCategoryFilter('helper')}
+              className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                categoryFilter === 'helper' ? 'bg-green-500 text-white' : 'bg-discord-dark border border-white/10 hover:border-green-500/50'
+              }`}
+            >
+              Helper ({stats.helper})
+            </button>
+            <button
+              onClick={() => setCategoryFilter('developer')}
+              className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                categoryFilter === 'developer' ? 'bg-blue-500 text-white' : 'bg-discord-dark border border-white/10 hover:border-blue-500/50'
+              }`}
+            >
+              Developer ({stats.developer})
+            </button>
+            <button
+              onClick={() => setCategoryFilter('slayer')}
+              className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                categoryFilter === 'slayer' ? 'bg-red-500 text-white' : 'bg-discord-dark border border-white/10 hover:border-red-500/50'
+              }`}
+            >
+              Slayer ({stats.slayer})
+            </button>
+            <button
+              onClick={() => setCategoryFilter('dungeon')}
+              className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                categoryFilter === 'dungeon' ? 'bg-indigo-500 text-white' : 'bg-discord-dark border border-white/10 hover:border-indigo-500/50'
+              }`}
+            >
+              Dungeon ({stats.dungeon})
+            </button>
+          </div>
+        </div>
+
         <div className="glass-card mb-6">
           <div className="flex gap-4">
             <div className="flex-1 relative">
@@ -464,7 +571,7 @@ export default function AdminDashboard() {
                   <div>
                     <h2 className="text-2xl font-bold">{selectedApp.sessionUsername || selectedApp.discordUsername}</h2>
                     <p className="text-gray-400 text-sm">
-                      {selectedApp.type} Application
+                      {selectedApp.careerType ? selectedApp.careerType.charAt(0).toUpperCase() + selectedApp.careerType.slice(1) : selectedApp.type.charAt(0).toUpperCase() + selectedApp.type.slice(1)} Application
                     </p>
                   </div>
                 </div>
@@ -496,6 +603,21 @@ export default function AdminDashboard() {
                       {selectedApp.status.replace('_', ' ')}
                     </span>
                   </div>
+                </div>
+                
+                {/* Category Change */}
+                <div className="bg-[#0a0a0a] rounded-lg p-3 border border-white/5">
+                  <p className="text-xs text-gray-500 mb-2">Change Category</p>
+                  <select
+                    value={selectedApp.careerType || selectedApp.type}
+                    onChange={(e) => updateCategory(selectedApp.id, e.target.value)}
+                    className="w-full bg-discord-dark border border-white/10 rounded-lg px-3 py-2 text-white focus:border-purple-500 focus:outline-none"
+                  >
+                    <option value="helper">Helper</option>
+                    <option value="developer">Developer</option>
+                    <option value="slayer">Slayer</option>
+                    <option value="dungeon">Dungeon</option>
+                  </select>
                 </div>
 
                 {Object.entries(selectedApp).map(([key, value]) => {
