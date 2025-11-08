@@ -51,8 +51,8 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Helper Position */}
-            <Link href={session ? "/dashboard/applications/helper" : "/auth/login"}>
+            {/* Staff Applications */}
+            <Link href={session ? "/dashboard/applications/staff" : "/auth/login"}>
               <div className="glass-card group hover:scale-[1.02] cursor-pointer animate-fade-in relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
                 
@@ -61,20 +61,20 @@ export default function Home() {
                     <Users className="w-10 h-10 text-white" />
                   </div>
                   
-                  <h3 className="text-3xl font-black mb-4">Helper</h3>
+                  <h3 className="text-3xl font-black mb-4">Apply for Staff</h3>
                   <p className="text-gray-400 text-lg mb-8">
-                    Support and assist our community
+                    Join our staff team as Helper or Developer
                   </p>
 
                   <div className="flex items-center text-purple-400 font-semibold group-hover:translate-x-2 transition-transform">
-                    Apply Now <ArrowRight className="w-5 h-5 ml-2" />
+                    View Positions <ArrowRight className="w-5 h-5 ml-2" />
                   </div>
                 </div>
               </div>
             </Link>
 
-            {/* Developer Position */}
-            <Link href={session ? "/dashboard/applications/developer" : "/auth/login"}>
+            {/* Career Applications */}
+            <Link href={session ? "/dashboard/applications/career" : "/auth/login"}>
               <div className="glass-card group hover:scale-[1.02] cursor-pointer animate-fade-in relative overflow-hidden" style={{animationDelay: '0.1s'}}>
                 <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
                 
@@ -83,13 +83,13 @@ export default function Home() {
                     <Code className="w-10 h-10 text-white" />
                   </div>
                   
-                  <h3 className="text-3xl font-black mb-4">Developer</h3>
+                  <h3 className="text-3xl font-black mb-4">Apply for Career</h3>
                   <p className="text-gray-400 text-lg mb-8">
-                    Build and create amazing features
+                    Join as Slayer or Dungeon Carrier
                   </p>
 
                   <div className="flex items-center text-purple-400 font-semibold group-hover:translate-x-2 transition-transform">
-                    Apply Now <ArrowRight className="w-5 h-5 ml-2" />
+                    View Positions <ArrowRight className="w-5 h-5 ml-2" />
                   </div>
                 </div>
               </div>
