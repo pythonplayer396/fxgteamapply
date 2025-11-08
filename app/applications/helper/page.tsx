@@ -7,8 +7,6 @@ import Link from 'next/link'
 export default function HelperApplicationPage() {
   const [submitted, setSubmitted] = useState(false)
   const [formData, setFormData] = useState({
-    name: '',
-    discordUsername: '',
     age: '',
     microphone: '',
     aboutYourself: '',
@@ -90,24 +88,8 @@ export default function HelperApplicationPage() {
 
         <form onSubmit={handleSubmit} className="bg-discord-dark border border-white/10 rounded-lg p-8 space-y-6">
           <div>
-            <label htmlFor="name" className="block text-sm font-semibold mb-2">
-              1. Your name and discord username <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              required
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="John Doe - username#1234"
-              className="input-field"
-            />
-          </div>
-
-          <div>
             <label htmlFor="age" className="block text-sm font-semibold mb-2">
-              2. Your age <span className="text-red-500">*</span>
+              Your age <span className="text-red-500">*</span>
             </label>
             <input
               type="number"
@@ -124,7 +106,7 @@ export default function HelperApplicationPage() {
 
           <div>
             <label htmlFor="microphone" className="block text-sm font-semibold mb-2">
-              3. Do you have a working microphone? <span className="text-red-500">*</span>
+              Do you have a working microphone? <span className="text-red-500">*</span>
             </label>
             <select
               id="microphone"
@@ -135,14 +117,14 @@ export default function HelperApplicationPage() {
               className="input-field"
             >
               <option value="">Select an option</option>
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
+              <option value="YES">YES</option>
+              <option value="NO">NO</option>
             </select>
           </div>
 
           <div>
             <label htmlFor="aboutYourself" className="block text-sm font-semibold mb-2">
-              4. Tell us about yourself! <span className="text-red-500">*</span>
+              Tell us about yourself! <span className="text-red-500">*</span>
             </label>
             <textarea
               id="aboutYourself"
@@ -158,7 +140,7 @@ export default function HelperApplicationPage() {
 
           <div>
             <label htmlFor="whyHireYou" className="block text-sm font-semibold mb-2">
-              5. Why do we hire you? <span className="text-red-500">*</span>
+              Why do we hire you? <span className="text-red-500">*</span>
             </label>
             <textarea
               id="whyHireYou"
@@ -174,7 +156,7 @@ export default function HelperApplicationPage() {
 
           <div>
             <label htmlFor="whyStaff" className="block text-sm font-semibold mb-2">
-              6. Why do you want to be staff member on our server? <span className="text-red-500">*</span>
+              Why do you want to be staff member on our server? <span className="text-red-500">*</span>
             </label>
             <textarea
               id="whyStaff"
@@ -190,7 +172,7 @@ export default function HelperApplicationPage() {
 
           <div>
             <label htmlFor="rulesKnowledge" className="block text-sm font-semibold mb-2">
-              7. Are you well aware regarding the server rules and guidelines? If yes, let us know how would you impose that on our members if you see on of them abusing or breaking the rules in the chat? <span className="text-red-500">*</span>
+              Are you well aware regarding the server rules and guidelines? If yes, let us know how would you impose that on our members if you see on of them abusing or breaking the rules in the chat? <span className="text-red-500">*</span>
             </label>
             <textarea
               id="rulesKnowledge"
@@ -206,7 +188,7 @@ export default function HelperApplicationPage() {
 
           <div>
             <label htmlFor="gameInfo" className="block text-sm font-semibold mb-2">
-              8. Let us know your In game name(IGN), Rank and Fakepixel Networth and your total playtime! <span className="text-red-500">*</span>
+              Let us know your In game name(IGN), Rank and Fakepixel Networth and your total playtime! <span className="text-red-500">*</span>
             </label>
             <textarea
               id="gameInfo"
@@ -222,7 +204,7 @@ export default function HelperApplicationPage() {
 
           <div>
             <label htmlFor="priorExperience" className="block text-sm font-semibold mb-2">
-              9. Have you ever been a staff member in another server? If yes, let us know about your strength and weakness! <span className="text-red-500">*</span>
+              Have you ever been a staff member in another server? If yes, let us know about your strength and weakness! <span className="text-red-500">*</span>
             </label>
             <textarea
               id="priorExperience"
@@ -238,7 +220,7 @@ export default function HelperApplicationPage() {
 
           <div>
             <label htmlFor="additionalInfo" className="block text-sm font-semibold mb-2">
-              10. Is there anything you want us to know about?
+              Is there anything you want us to know about?
             </label>
             <textarea
               id="additionalInfo"
