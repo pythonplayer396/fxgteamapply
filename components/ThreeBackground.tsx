@@ -5,135 +5,113 @@ import * as THREE from 'three'
 
 export default function ThreeBackground() {
   const mountRef = useRef<HTMLDivElement>(null)
-  const sceneRef = useRef<THREE.Scene>()
-  const rendererRef = useRef<THREE.WebGLRenderer>()
-  const cameraRef = useRef<THREE.PerspectiveCamera>()
-  const particlesRef = useRef<THREE.Points>()
+  const animationIdRef = useRef<number>()
 
   useEffect(() => {
     if (!mountRef.current) return
 
-    // Scene setup
-    const scene = new THREE.Scene()
-    sceneRef.current = scene
+    let scene: THREE.Scene
+    let camera: THREE.PerspectiveCamera
+    let renderer: THREE.WebGLRenderer
+    let particles: THREE.Points
 
-    // Camera setup
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000
-    )
-    camera.position.z = 5
-    cameraRef.current = camera
+    try {
+      // Scene setup
+      scene = new THREE.Scene()
 
-    // Renderer setup
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true })
-    renderer.setSize(window.innerWidth, window.innerHeight)
-    renderer.setClearColor(0x000000, 0)
-    rendererRef.current = renderer
-    mountRef.current.appendChild(renderer.domElement)
-
-    // Create particles
-    const particlesGeometry = new THREE.BufferGeometry()
-    const particlesCount = 1000
-
-    const posArray = new Float32Array(particlesCount * 3)
-    for (let i = 0; i < particlesCount * 3; i++) {
-      posArray[i] = (Math.random() - 0.5) * 20
-    }
-
-    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3))
-
-    // Create material
-    const particlesMaterial = new THREE.PointsMaterial({
-      size: 0.005,
-      color: 0x8B5CF6,
-      transparent: true,
-      opacity: 0.8,
-    })
-
-    // Create mesh
-    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial)
-    scene.add(particlesMesh)
-    particlesRef.current = particlesMesh
-
-    // Create floating cubes
-    const cubeGeometry = new THREE.BoxGeometry(0.1, 0.1, 0.1)
-    const cubeMaterial = new THREE.MeshBasicMaterial({ 
-      color: 0x8B5CF6, 
-      transparent: true, 
-      opacity: 0.3 
-    })
-
-    for (let i = 0; i < 50; i++) {
-      const cube = new THREE.Mesh(cubeGeometry, cubeMaterial)
-      cube.position.set(
-        (Math.random() - 0.5) * 20,
-        (Math.random() - 0.5) * 20,
-        (Math.random() - 0.5) * 20
+      // Camera setup
+      camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
       )
-      cube.rotation.set(
-        Math.random() * Math.PI,
-        Math.random() * Math.PI,
-        Math.random() * Math.PI
-      )
-      scene.add(cube)
-    }
+      camera.position.z = 5
 
-    // Animation loop
-    const animate = () => {
-      requestAnimationFrame(animate)
+      // Renderer setup
+      renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true })
+      renderer.setSize(window.innerWidth, window.innerHeight)
+      renderer.setClearColor(0x000000, 0)
+      mountRef.current.appendChild(renderer.domElement)
 
-      if (particlesRef.current) {
-        particlesRef.current.rotation.x += 0.001
-        particlesRef.current.rotation.y += 0.001
+      // Create particles
+      const particlesGeometry = new THREE.BufferGeometry()
+      const particlesCount = 500 // Reduced for better performance
+
+      const posArray = new Float32Array(particlesCount * 3)
+      for (let i = 0; i < particlesCount * 3; i++) {
+        posArray[i] = (Math.random() - 0.5) * 15
       }
 
-      // Rotate cubes
-      scene.children.forEach((child) => {
-        if (child instanceof THREE.Mesh && child.geometry instanceof THREE.BoxGeometry) {
-          child.rotation.x += 0.01
-          child.rotation.y += 0.01
-        }
+      particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3))
+
+      // Create material
+      const particlesMaterial = new THREE.PointsMaterial({
+        size: 0.01,
+        color: 0x8B5CF6,
+        transparent: true,
+        opacity: 0.6,
       })
 
-      renderer.render(scene, camera)
-    }
+      // Create mesh
+      particles = new THREE.Points(particlesGeometry, particlesMaterial)
+      scene.add(particles)
 
-    animate()
+      // Animation loop
+      const animate = () => {
+        animationIdRef.current = requestAnimationFrame(animate)
 
-    // Handle scroll for zoom effect
-    const handleScroll = () => {
-      const scrollY = window.scrollY
-      const maxScroll = document.body.scrollHeight - window.innerHeight
-      const scrollProgress = scrollY / maxScroll
-      
-      if (cameraRef.current) {
-        cameraRef.current.position.z = 5 + scrollProgress * 10
+        if (particles) {
+          particles.rotation.x += 0.0005
+          particles.rotation.y += 0.0005
+        }
+
+        renderer.render(scene, camera)
       }
-    }
 
-    // Handle resize
-    const handleResize = () => {
-      if (cameraRef.current && rendererRef.current) {
-        cameraRef.current.aspect = window.innerWidth / window.innerHeight
-        cameraRef.current.updateProjectionMatrix()
-        rendererRef.current.setSize(window.innerWidth, window.innerHeight)
+      animate()
+
+      // Handle scroll for zoom effect
+      const handleScroll = () => {
+        const scrollY = window.scrollY
+        const maxScroll = Math.max(document.body.scrollHeight - window.innerHeight, 1)
+        const scrollProgress = Math.min(scrollY / maxScroll, 1)
+        
+        if (camera) {
+          camera.position.z = 5 + scrollProgress * 3
+        }
       }
-    }
 
-    window.addEventListener('scroll', handleScroll)
-    window.addEventListener('resize', handleResize)
-
-    // Cleanup
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('resize', handleResize)
-      if (mountRef.current && renderer.domElement) {
-        mountRef.current.removeChild(renderer.domElement)
+      // Handle resize
+      const handleResize = () => {
+        if (camera && renderer) {
+          camera.aspect = window.innerWidth / window.innerHeight
+          camera.updateProjectionMatrix()
+          renderer.setSize(window.innerWidth, window.innerHeight)
+        }
       }
-      renderer.dispose()
+
+      window.addEventListener('scroll', handleScroll, { passive: true })
+      window.addEventListener('resize', handleResize)
+
+      // Cleanup
+      return () => {
+        if (animationIdRef.current) {
+          cancelAnimationFrame(animationIdRef.current)
+        }
+        window.removeEventListener('scroll', handleScroll)
+        window.removeEventListener('resize', handleResize)
+        
+        if (mountRef.current && renderer.domElement) {
+          mountRef.current.removeChild(renderer.domElement)
+        }
+        
+        renderer.dispose()
+        particlesGeometry.dispose()
+        particlesMaterial.dispose()
+      }
+    } catch (error) {
+      console.error('Three.js error:', error)
     }
   }, [])
 

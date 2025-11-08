@@ -27,7 +27,7 @@ export default function Slideshow() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length)
-    }, 4000)
+    }, 3000) // Faster transitions
 
     return () => clearInterval(timer)
   }, [])

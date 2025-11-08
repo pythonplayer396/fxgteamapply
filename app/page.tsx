@@ -12,11 +12,12 @@ import Logo from '@/components/Logo'
 export default function Home() {
   const { data: session } = useSession()
   const [showMainContent, setShowMainContent] = useState(false)
+  const [showThreeBackground, setShowThreeBackground] = useState(true)
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowMainContent(true)
-    }, 12000) // Show main content after slideshow
+    }, 9000) // Show main content after slideshow (reduced time)
 
     return () => clearTimeout(timer)
   }, [])
@@ -30,7 +31,21 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       {/* Three.js Background */}
-      <ThreeBackground />
+      {showThreeBackground && (
+        <div 
+          onError={() => setShowThreeBackground(false)}
+          className="fixed inset-0 -z-10"
+        >
+          <ThreeBackground />
+        </div>
+      )}
+      
+      {/* Fallback background */}
+      {!showThreeBackground && (
+        <div className="fixed inset-0 -z-10 bg-gradient-to-br from-purple-900/10 via-pink-900/5 to-blue-900/10">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(139,92,246,0.1),transparent_70%)]"></div>
+        </div>
+      )}
 
       {/* Slideshow Section */}
       {!showMainContent && (
