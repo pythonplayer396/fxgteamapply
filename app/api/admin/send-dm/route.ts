@@ -5,16 +5,18 @@ export async function POST(request: Request) {
   try {
     console.log('=== Discord DM API Called ===')
     
-    // Check admin authentication
-    const cookieStore = cookies()
-    const adminSession = cookieStore.get('admin_session')
+    const { discordId, applicantName, applicationType, status, isCareer } = await request.json()
     
-    if (!adminSession) {
-      console.error('No admin session found')
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    // Check admin authentication only for non-career applications
+    if (!isCareer) {
+      const cookieStore = cookies()
+      const adminSession = cookieStore.get('admin_session')
+      
+      if (!adminSession) {
+        console.error('No admin session found')
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+      }
     }
-
-    const { discordId, applicantName, applicationType, status } = await request.json()
     
     console.log('Request data:', { discordId, applicantName, applicationType, status })
 
@@ -31,7 +33,7 @@ export async function POST(request: Request) {
       endpoint = '/send-interview-dm'
     } else if (status === 'approved') {
       endpoint = '/send-approval-dm'
-    } else if (status === 'denied' || status === 'interview_failed') {
+    } else if (status === 'denied' || status === 'declined' || status === 'interview_failed') {
       endpoint = '/send-denial-dm'
     } else {
       // No DM needed for other statuses

@@ -43,12 +43,12 @@ export default function DashboardHome() {
 
         {/* Application Options */}
         <div className="mb-10 text-center">
-          <h2 className="text-4xl font-black">Available Positions</h2>
+          <h2 className="text-4xl font-black">Choose Application Type</h2>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {/* Helper Application */}
-          <Link href="/dashboard/applications/helper">
+          {/* Staff Applications */}
+          <Link href="/dashboard/applications/staff">
             <div className="glass-card p-8 hover:scale-[1.02] transition-all group cursor-pointer relative overflow-hidden">
               <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
               
@@ -57,20 +57,20 @@ export default function DashboardHome() {
                   <Users className="w-10 h-10 text-white" />
                 </div>
                 
-                <h2 className="text-3xl font-black mb-4">Helper</h2>
+                <h2 className="text-3xl font-black mb-4">Apply for Staff</h2>
                 <p className="text-gray-400 text-lg mb-8">
-                  Support our community
+                  Join our staff team as Helper or Developer
                 </p>
 
                 <div className="flex items-center text-purple-400 font-semibold group-hover:translate-x-2 transition-transform">
-                  Apply Now <ArrowRight className="w-5 h-5 ml-2" />
+                  View Positions <ArrowRight className="w-5 h-5 ml-2" />
                 </div>
               </div>
             </div>
           </Link>
 
-          {/* Developer Application */}
-          <Link href="/dashboard/applications/developer">
+          {/* Career Applications */}
+          <Link href="/dashboard/applications/career">
             <div className="glass-card p-8 hover:scale-[1.02] transition-all group cursor-pointer relative overflow-hidden">
               <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
               
@@ -79,13 +79,13 @@ export default function DashboardHome() {
                   <Code className="w-10 h-10 text-white" />
                 </div>
                 
-                <h2 className="text-3xl font-black mb-4">Developer</h2>
+                <h2 className="text-3xl font-black mb-4">Apply for Career</h2>
                 <p className="text-gray-400 text-lg mb-8">
-                  Build amazing features
+                  Join as Slayer or Dungeon Carrier
                 </p>
 
                 <div className="flex items-center text-purple-400 font-semibold group-hover:translate-x-2 transition-transform">
-                  Apply Now <ArrowRight className="w-5 h-5 ml-2" />
+                  View Positions <ArrowRight className="w-5 h-5 ml-2" />
                 </div>
               </div>
             </div>
