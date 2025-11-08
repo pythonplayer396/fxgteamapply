@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { Menu, X, User, FileText, LogOut, Home } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { useSession, signOut } from 'next-auth/react'
-import Logo from './Logo'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -55,8 +54,10 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 group">
-            <Logo className="w-11 h-11" />
-            <span className="text-2xl font-black hidden sm:block text-white">
+            <div className="w-11 h-11 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg shadow-purple-500/50">
+              <span className="text-white font-black text-xl">F</span>
+            </div>
+            <span className="text-2xl font-black hidden sm:block gradient-text">
               FxG
             </span>
           </Link>
