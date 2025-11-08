@@ -7,6 +7,7 @@ import Link from 'next/link'
 export default function SlayerCarrierApplicationPage() {
   const [submitted, setSubmitted] = useState(false)
   const [formData, setFormData] = useState({
+    discordId: '',
     ign: '',
     networth: '',
     playtime: '',
@@ -118,6 +119,25 @@ export default function SlayerCarrierApplicationPage() {
         </div>
 
         <form onSubmit={handleSubmit} className="bg-discord-dark border border-white/10 rounded-lg p-8 space-y-6">
+          <div>
+            <label htmlFor="discordId" className="block text-sm font-semibold mb-2">
+              Discord User ID <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              id="discordId"
+              name="discordId"
+              required
+              value={formData.discordId}
+              onChange={handleChange}
+              placeholder="123456789012345678"
+              className="input-field"
+            />
+            <p className="text-xs text-gray-400 mt-1">
+              Right-click your profile in Discord → Copy User ID (Developer Mode must be enabled)
+            </p>
+          </div>
+
           <div>
             <label htmlFor="ign" className="block text-sm font-semibold mb-2">
               What's your in-game name? <span className="text-red-500">*</span>
