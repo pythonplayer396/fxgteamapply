@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === 'development') {
   let globalWithMongo = global as typeof globalThis & {
     _mongoClientPromise?: Promise<MongoClient>
   }
-
+  
   if (!globalWithMongo._mongoClientPromise) {
     if (!uri) {
       throw new Error('Please add your MongoDB URI to .env.local')

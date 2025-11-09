@@ -332,6 +332,7 @@ export default function CareerAdminPortal() {
 
                 {Object.entries(selectedApp).map(([key, value]) => {
                   if (['id', 'status', 'submittedAt', 'updatedAt', 'sessionAvatar', 'sessionUsername', 'sessionEmail', 'sessionDiscordId', 'type', 'timestamp', 'applicationType', 'careerType'].includes(key)) return null
+                  if (!key || value === null || value === undefined) return null
                   return (
                     <div key={key} className="bg-[#0a0a0a] rounded-lg p-3 border border-white/5">
                       <p className="text-xs text-gray-500 mb-1 capitalize">{key.replace(/([A-Z])/g, ' $1')}</p>

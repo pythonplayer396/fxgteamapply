@@ -524,7 +524,7 @@ export default function AdminDashboard() {
           </div>
           <div className="flex items-center justify-between text-sm text-gray-400 mt-4">
             <p>Showing {filtered.length} of {applications.length} applications</p>
-            <p>Filter: <span className="text-white font-semibold capitalize">{activeTab.replace('_', ' ')}</span></p>
+            <p>Filter: <span className="text-white font-semibold capitalize">{activeTab ? activeTab.replace('_', ' ') : 'all'}</span></p>
           </div>
         </div>
 
@@ -547,7 +547,7 @@ export default function AdminDashboard() {
                     app.status === 'denied' ? 'bg-red-500/20 text-red-500' :
                     'bg-orange-500/20 text-orange-500'
                   }`}>
-                    {app.status.replace('_', ' ')}
+                    {app.status ? app.status.replace('_', ' ') : 'Unknown'}
                   </span>
                 </div>
                 <p className="text-gray-400 text-sm">Type: {app.type}</p>
@@ -607,7 +607,7 @@ export default function AdminDashboard() {
                       selectedApp.status === 'denied' ? 'bg-red-500/20 text-red-500' :
                       'bg-orange-500/20 text-orange-500'
                     }`}>
-                      {selectedApp.status.replace('_', ' ')}
+                      {selectedApp.status ? selectedApp.status.replace('_', ' ') : 'Unknown'}
                     </span>
                   </div>
                 </div>
@@ -631,7 +631,7 @@ export default function AdminDashboard() {
                   if (['id', 'status', 'submittedAt', 'updatedAt', 'sessionAvatar', 'sessionUsername', 'sessionEmail', 'sessionDiscordId'].includes(key)) return null
                   return (
                     <div key={key} className="bg-[#0a0a0a] rounded-lg p-3 border border-white/5">
-                      <p className="text-xs text-gray-500 mb-1 capitalize">{key.replace(/([A-Z])/g, ' $1')}</p>
+                      <p className="text-xs text-gray-500 mb-1 capitalize">{key ? key.replace(/([A-Z])/g, ' $1') : ''}</p>
                       <p className="text-white break-words">{String(value)}</p>
                     </div>
                   )

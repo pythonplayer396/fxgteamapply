@@ -217,7 +217,7 @@ export default function AdminDashboard() {
                   : 'bg-discord-dark text-gray-400 hover:text-white'
               }`}
             >
-              {tab.replace('_', ' ').toUpperCase()}
+              {tab ? tab.replace('_', ' ').toUpperCase() : 'ALL'}
             </button>
           ))}
         </div>
@@ -260,7 +260,7 @@ export default function AdminDashboard() {
                     app.status === 'denied' ? 'bg-red-500/20 text-red-500' :
                     'bg-orange-500/20 text-orange-500'
                   }`}>
-                    {app.status.replace('_', ' ')}
+                    {app.status ? app.status.replace('_', ' ') : 'Unknown'}
                   </span>
                 </div>
                 <p className="text-gray-400 text-sm">Type: {app.type}</p>
@@ -280,7 +280,7 @@ export default function AdminDashboard() {
                   if (['id', 'status', 'submittedAt', 'updatedAt'].includes(key)) return null
                   return (
                     <div key={key}>
-                      <p className="text-sm text-gray-400 capitalize">{key.replace(/([A-Z])/g, ' $1')}</p>
+                      <p className="text-sm text-gray-400 capitalize">{key ? key.replace(/([A-Z])/g, ' $1') : ''}</p>
                       <p className="text-white">{value}</p>
                     </div>
                   )
@@ -324,7 +324,7 @@ export default function AdminDashboard() {
                   </>
                 )}
                 {(selectedApp.status === 'approved' || selectedApp.status === 'denied' || selectedApp.status === 'interview_failed') && (
-                  <p className="text-gray-400 text-center py-4">Application {selectedApp.status.replace('_', ' ')}</p>
+                  <p className="text-gray-400 text-center py-4">Application {selectedApp.status ? selectedApp.status.replace('_', ' ') : 'processed'}</p>
                 )}
                 <button
                   onClick={() => deleteApplication(selectedApp.id)}
