@@ -48,31 +48,64 @@ export async function PUT(request: Request) {
   }
 
   try {
-    const { id, status } = await request.json()
+    const { id, status, type, careerType, applicationType } = await request.json()
     const db = await readDatabase()
     
     const app: any = db.applications.find((app: any) => app.id === id)
     if (app) {
-      const oldStatus = app.status
-      
-      await updateApplication(id, {
-        status,
+      const updateData: any = {
         updatedAt: new Date().toISOString()
-      })
+      }
       
-      // Log status change
-      await logAuditEvent({
-        action: 'APPLICATION_STATUS_CHANGED',
-        adminUser: 'admin', // In production, get from session
-        targetId: id,
-        targetType: 'application',
-        details: {
-          oldStatus,
-          newStatus: status,
-          applicationType: (app as any).type,
-          discordUsername: (app as any).discordUsername
+      // Handle status updates
+      if (status !== undefined) {
+        const oldStatus = app.status
+        updateData.status = status
+        
+        // Log status change
+        await logAuditEvent({
+          action: 'APPLICATION_STATUS_CHANGED',
+          adminUser: 'admin', // In production, get from session
+          targetId: id,
+          targetType: 'application',
+          details: {
+            oldStatus,
+            newStatus: status,
+            applicationType: app.type,
+            discordUsername: app.discordUsername
+          }
+        })
+      }
+      
+      // Handle category updates
+      if (type !== undefined || careerType !== undefined || applicationType !== undefined) {
+        const oldCategory = app.careerType || app.type
+        
+        if (type !== undefined) updateData.type = type
+        if (careerType !== undefined) updateData.careerType = careerType
+        if (applicationType !== undefined) updateData.applicationType = applicationType
+        
+        // Clear conflicting fields
+        if (type && (type === 'helper' || type === 'developer')) {
+          updateData.careerType = null
+          updateData.applicationType = null
         }
-      })
+        
+        // Log category change
+        await logAuditEvent({
+          action: 'APPLICATION_CATEGORY_CHANGED',
+          adminUser: 'admin',
+          targetId: id,
+          targetType: 'application',
+          details: {
+            oldCategory,
+            newCategory: careerType || type,
+            discordUsername: app.discordUsername
+          }
+        })
+      }
+      
+      await updateApplication(id, updateData)
     }
     
     return NextResponse.json({ success: true })
