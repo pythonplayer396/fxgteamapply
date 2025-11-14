@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 
 export async function GET() {
   try {
-    const botApiUrl = process.env.BOT_API_URL || 'https://fxg-bot-api.onrender.com'
+    const botApiUrl = process.env.BOT_API_URL || 'https://9fa4d7be-3f4f-429e-bc01-ed0dca695ca9-00-35wnnn8ahjqm3.pike.replit.dev/'
     
     console.log('Pinging bot API to keep it awake...')
     const response = await fetch(botApiUrl, {

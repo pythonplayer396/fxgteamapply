@@ -15,7 +15,7 @@ export default function DeveloperApplicationPage() {
     
     // Experience & Skills
     developerExperience: '',
-    languagesFrameworks: '',
+    languagesFrameworks: '',    
     previousProjects: '',
     botsPluginsMods: '',
     versionControl: '',
