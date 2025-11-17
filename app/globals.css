@@ -2,23 +2,99 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  /* Render Color System */
+  --bg-primary: #0B0B0D;
+  --bg-secondary: #111317;
+  --bg-panel: #16181D;
+  --border-subtle: #2A2D33;
+  --border-panel: #2D3136;
+  --accent-purple: #9A4DFF;
+  --accent-light-purple: #D4C6FF;
+  --accent-cyan: #00E6F6;
+  --accent-green: #00FF8C;
+  --text-primary: #F5F5F5;
+  --text-secondary: #A0A0A0;
+  --grid-cyan: #4CC9FF;
+  --highlight-cyan: #6BE6FF;
+}
+
+body {
+  @apply text-white;
+  background: linear-gradient(135deg, #0A0A0C 0%, #111317 100%);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  min-height: 100vh;
+}
+
 @layer base {
   * {
     @apply border-gray-200;
   }
   
   body {
-    @apply antialiased bg-[#0a0a0a] text-white;
+    @apply antialiased;
   }
 }
 
 @layer components {
-  .glass-card {
-    @apply bg-[#111111] backdrop-blur-xl border border-white/5 rounded-2xl p-8 shadow-2xl hover:shadow-[0_0_50px_rgba(139,92,246,0.3)] hover:border-purple-500/30 transition-all duration-500;
+  /* Render-style Panel Cards */
+  .render-panel {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-panel);
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.12);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
-  .btn-primary {
-    @apply bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-[length:200%_100%] hover:bg-right text-white font-bold py-4 px-10 rounded-2xl transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(168,85,247,0.6)] relative overflow-hidden;
+  .render-panel:hover {
+    border-color: var(--border-subtle);
+    box-shadow: 0 0 60px rgba(76, 201, 255, 0.08);
+  }
+  
+  /* Render-style Primary Button */
+  .btn-render-primary {
+    background: #111;
+    color: var(--text-primary);
+    border: 1px solid #222;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-weight: 500;
+    font-size: 16px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: -0.01em;
+  }
+  
+  .btn-render-primary:hover {
+    background: #1a1a1a;
+    border-color: #333;
+    transform: translateY(-1px);
+  }
+  
+  /* Render-style Secondary Button */
+  .btn-render-secondary {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-weight: 500;
+    font-size: 16px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: -0.01em;
+  }
+  
+  .btn-render-secondary:hover {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 20px rgba(76, 201, 255, 0.1);
+  }
+  
+  /* Legacy glass-card for backward compatibility */
+  .glass-card {
+    @apply bg-[#16181D] border border-[#2D3136] rounded-lg p-8 shadow-2xl hover:shadow-[0_0_60px_rgba(76,201,255,0.08)] hover:border-[#2A2D33] transition-all duration-300;
   }
   
   .btn-secondary {
@@ -239,4 +315,110 @@
 .animate-float-6 {
   animation: float-6 5s ease-in-out infinite;
   animation-delay: 1.5s;
+}
+
+/* Render-style 3D Grid Animation */
+.render-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(76, 201, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(76, 201, 255, 0.1) 1px, transparent 1px);
+  background-size: 60px 60px;
+  transform: perspective(1000px) rotateX(20deg);
+  transform-origin: center bottom;
+  opacity: 0.3;
+  animation: grid-pulse 8s ease-in-out infinite;
+}
+
+@keyframes grid-pulse {
+  0%, 100% { 
+    opacity: 0.2;
+  }
+  50% { 
+    opacity: 0.4;
+  }
+}
+
+/* Light Sweep Animation */
+.grid-sweep {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(76, 201, 255, 0.1) 50%,
+    transparent 100%
+  );
+  animation: sweep 10s ease-in-out infinite;
+}
+
+@keyframes sweep {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: -100%; }
+}
+
+/* Floating Panel Animations */
+.floating-panel {
+  animation: float-panel 6s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+.floating-panel:nth-child(2) { animation-delay: 1s; }
+.floating-panel:nth-child(3) { animation-delay: 2s; }
+.floating-panel:nth-child(4) { animation-delay: 3s; }
+
+@keyframes float-panel {
+  0%, 100% {
+    transform: translateY(0px) translateZ(0px);
+  }
+  50% {
+    transform: translateY(-10px) translateZ(5px);
+  }
+}
+
+/* Fade-in Scroll Animations */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px) blur(2px);
+  animation: fade-in-up 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes fade-in-up {
+  to {
+    opacity: 1;
+    transform: translateY(0) blur(0);
+  }
+}
+
+/* Staggered animation delays */
+.fade-in-up:nth-child(1) { animation-delay: 0.1s; }
+.fade-in-up:nth-child(2) { animation-delay: 0.2s; }
+.fade-in-up:nth-child(3) { animation-delay: 0.3s; }
+.fade-in-up:nth-child(4) { animation-delay: 0.4s; }
+
+/* Typography Styles */
+.render-title {
+  font-size: clamp(48px, 8vw, 72px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.render-subtitle {
+  font-size: clamp(20px, 3vw, 24px);
+  font-weight: 400;
+  color: var(--text-secondary);
+  letter-spacing: -0.01em;
+}
+
+.render-body {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
 }

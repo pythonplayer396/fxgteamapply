@@ -16,67 +16,127 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative pt-40 pb-32 px-4 overflow-hidden">
-        {/* Animated Background */}
+      <section className="relative min-h-screen flex items-center px-4 overflow-hidden">
+        {/* 3D Grid Background */}
         <div className="absolute inset-0 -z-10">
-          <div className="absolute top-20 left-10 w-[600px] h-[600px] bg-purple-600/20 rounded-full blur-[120px] animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-[600px] h-[600px] bg-pink-600/20 rounded-full blur-[120px] animate-pulse" style={{animationDelay: '1s'}}></div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-purple-500/10 rounded-full blur-[150px]"></div>
+          <div className="render-grid"></div>
+          <div className="grid-sweep"></div>
+          {/* Film grain overlay */}
+          <div className="absolute inset-0 opacity-[0.015] bg-[url('data:image/svg+xml,%3Csvg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E')]"></div>
         </div>
 
-        {/* 3D Animated Cubes */}
+        {/* Floating Dashboard Panels */}
         <div className="absolute inset-0 -z-5 pointer-events-none">
-          {/* Cube 1 */}
-          <div className="absolute top-20 right-20 w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg shadow-lg animate-float-1 opacity-80">
-            <div className="w-full h-full bg-gradient-to-br from-purple-400 to-pink-400 rounded-lg transform rotate-12 scale-90"></div>
+          {/* Panel 1 - Analytics */}
+          <div className="floating-panel absolute top-20 right-20 w-64 h-40 render-panel opacity-60">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-2 h-2 bg-[#00FF8C] rounded-full"></div>
+              <span className="text-xs text-gray-400 font-medium">Analytics</span>
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-between text-xs">
+                <span className="text-gray-500">Active Users</span>
+                <span className="text-[#00E6F6]">2,847</span>
+              </div>
+              <div className="w-full h-1 bg-gray-800 rounded-full overflow-hidden">
+                <div className="w-3/4 h-full bg-gradient-to-r from-[#00E6F6] to-[#9A4DFF] rounded-full"></div>
+              </div>
+              <div className="flex gap-1 mt-3">
+                {[...Array(12)].map((_, i) => (
+                  <div key={i} className="w-1 bg-gray-700 rounded-full" style={{height: `${Math.random() * 20 + 5}px`}}></div>
+                ))}
+              </div>
+            </div>
           </div>
-          
-          {/* Cube 2 */}
-          <div className="absolute top-40 right-40 w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-500 rounded-md shadow-lg animate-float-2 opacity-70">
-            <div className="w-full h-full bg-gradient-to-br from-blue-400 to-purple-400 rounded-md transform -rotate-12 scale-90"></div>
+
+          {/* Panel 2 - Code Snippet */}
+          <div className="floating-panel absolute top-40 right-80 w-72 h-32 render-panel opacity-50">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-2 h-2 bg-[#9A4DFF] rounded-full"></div>
+              <span className="text-xs text-gray-400 font-medium">Deploy Status</span>
+            </div>
+            <div className="font-mono text-xs space-y-1">
+              <div className="text-gray-500">$ npm run build</div>
+              <div className="text-[#00FF8C]">✓ Build completed</div>
+              <div className="text-[#00E6F6]">→ Deploying to production...</div>
+              <div className="text-gray-400">⏱ 2.3s</div>
+            </div>
           </div>
-          
-          {/* Cube 3 */}
-          <div className="absolute top-60 right-16 w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-500 rounded-xl shadow-lg animate-float-3 opacity-60">
-            <div className="w-full h-full bg-gradient-to-br from-pink-400 to-purple-400 rounded-xl transform rotate-45 scale-85"></div>
+
+          {/* Panel 3 - Metrics */}
+          <div className="floating-panel absolute bottom-40 right-32 w-48 h-36 render-panel opacity-70">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-2 h-2 bg-[#00E6F6] rounded-full"></div>
+              <span className="text-xs text-gray-400 font-medium">Performance</span>
+            </div>
+            <div className="space-y-3">
+              <div className="flex justify-between items-center">
+                <span className="text-xs text-gray-500">Response Time</span>
+                <span className="text-xs text-[#00FF8C]">23ms</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-xs text-gray-500">Uptime</span>
+                <span className="text-xs text-[#00FF8C]">99.9%</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-xs text-gray-500">Requests/min</span>
+                <span className="text-xs text-[#00E6F6]">1.2k</span>
+              </div>
+            </div>
           </div>
-          
-          {/* Cube 4 */}
-          <div className="absolute bottom-40 right-32 w-10 h-10 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg shadow-lg animate-float-4 opacity-75">
-            <div className="w-full h-full bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg transform -rotate-45 scale-95"></div>
-          </div>
-          
-          {/* Cube 5 */}
-          <div className="absolute bottom-20 right-12 w-14 h-14 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-lg shadow-lg animate-float-5 opacity-65">
-            <div className="w-full h-full bg-gradient-to-br from-indigo-400 to-purple-400 rounded-lg transform rotate-12 scale-90"></div>
-          </div>
-          
-          {/* Cube 6 */}
-          <div className="absolute top-32 right-60 w-6 h-6 bg-gradient-to-br from-cyan-500 to-blue-500 rounded shadow-lg animate-float-6 opacity-80">
-            <div className="w-full h-full bg-gradient-to-br from-cyan-400 to-blue-400 rounded transform rotate-90 scale-85"></div>
+
+          {/* Panel 4 - Mini Chart */}
+          <div className="floating-panel absolute bottom-20 right-12 w-56 h-28 render-panel opacity-55">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-2 h-2 bg-[#9A4DFF] rounded-full"></div>
+              <span className="text-xs text-gray-400 font-medium">Traffic</span>
+            </div>
+            <div className="flex items-end gap-1 h-12">
+              {[...Array(20)].map((_, i) => (
+                <div 
+                  key={i} 
+                  className="flex-1 bg-gradient-to-t from-[#9A4DFF]/30 to-[#00E6F6]/30 rounded-sm"
+                  style={{height: `${Math.random() * 100 + 10}%`}}
+                ></div>
+              ))}
+            </div>
           </div>
         </div>
 
-        <div className="max-w-6xl mx-auto text-center animate-fade-in">
-          <div className="inline-block mb-8 px-6 py-2 bg-white/5 backdrop-blur-xl rounded-full border border-white/10">
-            <span className="text-purple-400 font-semibold text-sm">✨ Now Hiring</span>
-          </div>
-          
-          <h1 className="text-6xl md:text-8xl font-black mb-8 leading-none">
-            Join <span className="gradient-text">FxG</span>
-          </h1>
-          
-          <p className="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto font-light">
-            Become part of something extraordinary
-          </p>
+        {/* Hero Content - Left Side */}
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+          <div className="fade-in-up">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--bg-panel)] border border-[var(--border-panel)] rounded-full mb-8">
+              <div className="w-2 h-2 bg-[var(--accent-green)] rounded-full animate-pulse"></div>
+              <span className="text-sm font-medium text-[var(--text-secondary)]">Now Hiring</span>
+            </div>
+            
+            <h1 className="render-title text-[var(--text-primary)] mb-6">
+              Join <span style={{color: 'var(--accent-purple)'}}>FxG</span>
+            </h1>
+            
+            <p className="render-subtitle mb-12 max-w-lg">
+              Become part of something extraordinary. Build the future of gaming with our elite team.
+            </p>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Link href={session ? "/dashboard" : "/auth/login"}>
-              <button className="btn-primary text-lg flex items-center gap-3 mx-auto group">
-                {session ? "Dashboard" : "Apply Now"}
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link href={session ? "/dashboard" : "/auth/login"}>
+                <button className="btn-render-primary flex items-center gap-2">
+                  {session ? "Dashboard" : "Apply Now"}
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </Link>
+              <Link href="#positions">
+                <button className="btn-render-secondary">
+                  View Positions
+                </button>
+              </Link>
+            </div>
+          </div>
+
+          {/* Right side - Animation space */}
+          <div className="hidden lg:block relative h-96">
+            {/* This space is for the floating panels which are positioned absolutely */}
           </div>
         </div>
       </section>
@@ -84,9 +144,9 @@ export default function Home() {
       {/* Positions Section */}
       <section id="positions" className="py-32 px-4">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20 animate-fade-in">
-            <h2 className="text-5xl md:text-6xl font-black mb-4">Open Roles</h2>
-            <p className="text-gray-500 text-lg">Pick your path</p>
+          <div className="text-center mb-20 fade-in-up">
+            <h2 className="render-title mb-4">Open Roles</h2>
+            <p className="render-subtitle">Pick your path</p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
