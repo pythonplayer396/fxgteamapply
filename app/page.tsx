@@ -24,6 +24,39 @@ export default function Home() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-purple-500/10 rounded-full blur-[150px]"></div>
         </div>
 
+        {/* 3D Animated Cubes */}
+        <div className="absolute inset-0 -z-5 pointer-events-none">
+          {/* Cube 1 */}
+          <div className="absolute top-20 right-20 w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg shadow-lg animate-float-1 opacity-80">
+            <div className="w-full h-full bg-gradient-to-br from-purple-400 to-pink-400 rounded-lg transform rotate-12 scale-90"></div>
+          </div>
+          
+          {/* Cube 2 */}
+          <div className="absolute top-40 right-40 w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-500 rounded-md shadow-lg animate-float-2 opacity-70">
+            <div className="w-full h-full bg-gradient-to-br from-blue-400 to-purple-400 rounded-md transform -rotate-12 scale-90"></div>
+          </div>
+          
+          {/* Cube 3 */}
+          <div className="absolute top-60 right-16 w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-500 rounded-xl shadow-lg animate-float-3 opacity-60">
+            <div className="w-full h-full bg-gradient-to-br from-pink-400 to-purple-400 rounded-xl transform rotate-45 scale-85"></div>
+          </div>
+          
+          {/* Cube 4 */}
+          <div className="absolute bottom-40 right-32 w-10 h-10 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg shadow-lg animate-float-4 opacity-75">
+            <div className="w-full h-full bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg transform -rotate-45 scale-95"></div>
+          </div>
+          
+          {/* Cube 5 */}
+          <div className="absolute bottom-20 right-12 w-14 h-14 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-lg shadow-lg animate-float-5 opacity-65">
+            <div className="w-full h-full bg-gradient-to-br from-indigo-400 to-purple-400 rounded-lg transform rotate-12 scale-90"></div>
+          </div>
+          
+          {/* Cube 6 */}
+          <div className="absolute top-32 right-60 w-6 h-6 bg-gradient-to-br from-cyan-500 to-blue-500 rounded shadow-lg animate-float-6 opacity-80">
+            <div className="w-full h-full bg-gradient-to-br from-cyan-400 to-blue-400 rounded transform rotate-90 scale-85"></div>
+          </div>
+        </div>
+
         <div className="max-w-6xl mx-auto text-center animate-fade-in">
           <div className="inline-block mb-8 px-6 py-2 bg-white/5 backdrop-blur-xl rounded-full border border-white/10">
             <span className="text-purple-400 font-semibold text-sm">✨ Now Hiring</span>
