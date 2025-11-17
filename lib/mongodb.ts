@@ -1,35 +1,45 @@
 import { MongoClient } from 'mongodb'
 
-const uri = process.env.MONGODB_URI || ''
+// Get MongoDB URI from environment
+const uri = process.env.MONGODB_URI
+
+// MongoDB connection options
 const options = {}
 
 let client: MongoClient
 let clientPromise: Promise<MongoClient>
 
-// Check if we're in build mode (Next.js sets this during build)
-const isBuildTime = process.env.NEXT_PHASE === 'phase-production-build' || 
-                   process.env.NODE_ENV === 'production' && !process.env.MONGODB_URI
+// Create a safe connection function that never throws at module level
+function createConnection(): Promise<MongoClient> {
+  // If no URI is provided, return a rejected promise
+  // This is safe for build time as it doesn't throw synchronously
+  if (!uri) {
+    return Promise.reject(new Error('MongoDB URI is not configured. Please set MONGODB_URI environment variable.'))
+  }
 
-if (isBuildTime || !uri) {
-  // During build time or when URI is missing, return a rejected promise
-  // This prevents throwing at module initialization time
-  clientPromise = Promise.reject(new Error('MongoDB URI not configured'))
-} else if (process.env.NODE_ENV === 'development') {
-  // In development mode, use a global variable so that the value
-  // is preserved across module reloads caused by HMR (Hot Module Replacement).
+  try {
+    client = new MongoClient(uri, options)
+    return client.connect()
+  } catch (error) {
+    // Return rejected promise instead of throwing
+    return Promise.reject(error)
+  }
+}
+
+// Initialize connection based on environment
+if (process.env.NODE_ENV === 'development') {
+  // In development mode, use a global variable to preserve connection across HMR
   let globalWithMongo = global as typeof globalThis & {
     _mongoClientPromise?: Promise<MongoClient>
   }
   
   if (!globalWithMongo._mongoClientPromise) {
-    client = new MongoClient(uri, options)
-    globalWithMongo._mongoClientPromise = client.connect()
+    globalWithMongo._mongoClientPromise = createConnection()
   }
   clientPromise = globalWithMongo._mongoClientPromise
 } else {
-  // In production mode, it's best to not use a global variable.
-  client = new MongoClient(uri, options)
-  clientPromise = client.connect()
+  // In production mode, create a new connection
+  clientPromise = createConnection()
 }
 
 // Export a module-scoped MongoClient promise. By doing this in a
