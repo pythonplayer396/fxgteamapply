@@ -30,96 +30,96 @@ export default function Home() {
         {/* Floating Application Form Panels */}
         <div className="absolute inset-0 -z-5 pointer-events-none">
           {/* Panel 1 - Helper Application */}
-          <div className="floating-panel absolute top-12 right-12 w-96 h-56 render-panel opacity-95 border border-[var(--accent-green)]/30 shadow-lg shadow-[var(--accent-green)]/20">
+          <div className="floating-panel absolute top-16 right-16 w-80 h-48 render-panel opacity-85">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-4 h-4 bg-[#00FF8C] rounded-full animate-pulse shadow-lg shadow-[#00FF8C]/50"></div>
-              <span className="text-base text-gray-200 font-bold">Helper Application</span>
+              <div className="w-3 h-3 bg-[#00FF8C] rounded-full animate-pulse"></div>
+              <span className="text-sm text-gray-300 font-semibold">Helper Application</span>
             </div>
             <div className="space-y-4">
-              <div className="text-base text-gray-100 font-medium">Join our staff team as Helper</div>
+              <div className="text-sm text-gray-200 font-medium">Join our staff team as Helper</div>
               <div className="space-y-3">
-                <div className="flex justify-between text-base">
-                  <span className="text-gray-300">Age Requirement</span>
-                  <span className="text-[#00FF8C] font-bold text-lg">13+</span>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-400">Age Requirement</span>
+                  <span className="text-[#00FF8C] font-semibold">13+</span>
                 </div>
-                <div className="flex justify-between text-base">
-                  <span className="text-gray-300">Microphone</span>
-                  <span className="text-[#00E6F6] font-bold">Required</span>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-400">Microphone</span>
+                  <span className="text-[#00E6F6] font-semibold">Required</span>
                 </div>
-                <div className="flex justify-between text-base">
-                  <span className="text-gray-300">Experience</span>
-                  <span className="text-[#9A4DFF] font-bold">Any Level</span>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-400">Experience</span>
+                  <span className="text-[#9A4DFF] font-semibold">Any Level</span>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Panel 2 - Developer Application */}
-          <div className="floating-panel absolute top-24 right-72 w-[400px] h-52 render-panel opacity-95 border border-[var(--accent-purple)]/30 shadow-lg shadow-[var(--accent-purple)]/20">
+          <div className="floating-panel absolute top-32 right-96 w-84 h-44 render-panel opacity-80">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-4 h-4 bg-[#9A4DFF] rounded-full animate-pulse shadow-lg shadow-[#9A4DFF]/50"></div>
-              <span className="text-base text-gray-200 font-bold">Developer Application</span>
+              <div className="w-3 h-3 bg-[#9A4DFF] rounded-full animate-pulse"></div>
+              <span className="text-sm text-gray-300 font-semibold">Developer Application</span>
             </div>
             <div className="space-y-4">
-              <div className="text-base text-gray-100 font-medium">Build the future with code</div>
+              <div className="text-sm text-gray-200 font-medium">Build the future with code</div>
               <div className="space-y-3">
-                <div className="flex justify-between text-base">
-                  <span className="text-gray-300">Languages</span>
-                  <span className="text-[#00E6F6] font-bold">Java, JS, Python</span>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-400">Languages</span>
+                  <span className="text-[#00E6F6] font-semibold">Java, JS, Python</span>
                 </div>
-                <div className="flex justify-between text-base">
-                  <span className="text-gray-300">Portfolio</span>
-                  <span className="text-[#00FF8C] font-bold">Required</span>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-400">Portfolio</span>
+                  <span className="text-[#00FF8C] font-semibold">Required</span>
                 </div>
-                <div className="flex justify-between text-base">
-                  <span className="text-gray-300">Projects</span>
-                  <span className="text-[#9A4DFF] font-bold">Bots, Plugins</span>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-400">Projects</span>
+                  <span className="text-[#9A4DFF] font-semibold">Bots, Plugins</span>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Panel 3 - Dungeon Carry Application */}
-          <div className="floating-panel absolute bottom-24 right-20 w-[360px] h-52 render-panel opacity-95 border border-[#FF6B35]/30 shadow-lg shadow-[#FF6B35]/20">
+          <div className="floating-panel absolute bottom-32 right-24 w-72 h-44 render-panel opacity-90">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-4 h-4 bg-[#FF6B35] rounded-full animate-pulse shadow-lg shadow-[#FF6B35]/50"></div>
-              <span className="text-base text-gray-200 font-bold">Dungeon Carry</span>
+              <div className="w-3 h-3 bg-[#FF6B35] rounded-full animate-pulse"></div>
+              <span className="text-sm text-gray-300 font-semibold">Dungeon Carry</span>
             </div>
             <div className="space-y-4">
-              <div className="text-base text-gray-100 font-medium">Elite dungeon specialist</div>
+              <div className="text-sm text-gray-200 font-medium">Elite dungeon specialist</div>
               <div className="space-y-3">
-                <div className="flex justify-between text-base">
-                  <span className="text-gray-300">Skill Level</span>
-                  <span className="text-[#FF6B35] font-bold text-lg">Expert</span>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-400">Skill Level</span>
+                  <span className="text-[#FF6B35] font-semibold">Expert</span>
                 </div>
-                <div className="flex justify-between text-base">
-                  <span className="text-gray-300">Availability</span>
-                  <span className="text-[#00E6F6] font-bold">Flexible</span>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-400">Availability</span>
+                  <span className="text-[#00E6F6] font-semibold">Flexible</span>
                 </div>
-                <div className="flex justify-between text-base">
-                  <span className="text-gray-300">Rewards</span>
-                  <span className="text-[#00FF8C] font-bold">Premium</span>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-400">Rewards</span>
+                  <span className="text-[#00FF8C] font-semibold">Premium</span>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Panel 4 - Slayer Application */}
-          <div className="floating-panel absolute bottom-12 right-4 w-[320px] h-48 render-panel opacity-95 border border-[#FF1744]/30 shadow-lg shadow-[#FF1744]/20">
+          <div className="floating-panel absolute bottom-16 right-8 w-68 h-40 render-panel opacity-85">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-4 h-4 bg-[#FF1744] rounded-full animate-pulse shadow-lg shadow-[#FF1744]/50"></div>
-              <span className="text-base text-gray-200 font-bold">Slayer</span>
+              <div className="w-3 h-3 bg-[#FF1744] rounded-full animate-pulse"></div>
+              <span className="text-sm text-gray-300 font-semibold">Slayer</span>
             </div>
             <div className="space-y-4">
-              <div className="text-base text-gray-100 font-medium">Combat specialist</div>
+              <div className="text-sm text-gray-200 font-medium">Combat specialist</div>
               <div className="space-y-3">
-                <div className="flex justify-between text-base">
-                  <span className="text-gray-300">Combat Skills</span>
-                  <span className="text-[#FF1744] font-bold text-lg">Elite</span>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-400">Combat Skills</span>
+                  <span className="text-[#FF1744] font-semibold">Elite</span>
                 </div>
-                <div className="flex justify-between text-base">
-                  <span className="text-gray-300">Boss Fights</span>
-                  <span className="text-[#00E6F6] font-bold">Expert</span>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-400">Boss Fights</span>
+                  <span className="text-[#00E6F6] font-semibold">Expert</span>
                 </div>
               </div>
             </div>
@@ -260,10 +260,11 @@ export default function Home() {
 
           <div className="grid gap-4 max-w-4xl mx-auto">
             {/* Dungeon Carry FAQ */}
-            <div className="render-panel group cursor-pointer fade-in-up border-l-4 border-l-[#FF6B35] hover:border-l-[var(--highlight-cyan)] transition-all duration-300">
+            <div className="render-panel group fade-in-up border-l-4 border-l-[#FF6B35] hover:border-l-[var(--highlight-cyan)] transition-all duration-300">
               <button
+                type="button"
                 onClick={() => toggleFAQ('dungeon')}
-                className="w-full flex items-center justify-between text-left"
+                className="w-full flex items-center justify-between text-left py-2 cursor-pointer"
               >
                 <div className="flex items-center gap-4">
                   <div className="flex items-center gap-3">
@@ -300,10 +301,11 @@ export default function Home() {
             </div>
 
             {/* Slayer FAQ */}
-            <div className="render-panel group cursor-pointer fade-in-up border-l-4 border-l-[#FF1744] hover:border-l-[var(--highlight-cyan)] transition-all duration-300">
+            <div className="render-panel group fade-in-up border-l-4 border-l-[#FF1744] hover:border-l-[var(--highlight-cyan)] transition-all duration-300">
               <button
+                type="button"
                 onClick={() => toggleFAQ('slayer')}
-                className="w-full flex items-center justify-between text-left"
+                className="w-full flex items-center justify-between text-left py-2 cursor-pointer"
               >
                 <div className="flex items-center gap-4">
                   <div className="flex items-center gap-3">
@@ -340,10 +342,11 @@ export default function Home() {
             </div>
 
             {/* Helper FAQ */}
-            <div className="render-panel group cursor-pointer fade-in-up border-l-4 border-l-[var(--accent-green)] hover:border-l-[var(--highlight-cyan)] transition-all duration-300">
+            <div className="render-panel group fade-in-up border-l-4 border-l-[var(--accent-green)] hover:border-l-[var(--highlight-cyan)] transition-all duration-300">
               <button
+                type="button"
                 onClick={() => toggleFAQ('helper')}
-                className="w-full flex items-center justify-between text-left"
+                className="w-full flex items-center justify-between text-left py-2 cursor-pointer"
               >
                 <div className="flex items-center gap-4">
                   <div className="flex items-center gap-3">
@@ -380,10 +383,11 @@ export default function Home() {
             </div>
 
             {/* Developer FAQ */}
-            <div className="render-panel group cursor-pointer fade-in-up border-l-4 border-l-[var(--accent-purple)] hover:border-l-[var(--highlight-cyan)] transition-all duration-300">
+            <div className="render-panel group fade-in-up border-l-4 border-l-[var(--accent-purple)] hover:border-l-[var(--highlight-cyan)] transition-all duration-300">
               <button
+                type="button"
                 onClick={() => toggleFAQ('developer')}
-                className="w-full flex items-center justify-between text-left"
+                className="w-full flex items-center justify-between text-left py-2 cursor-pointer"
               >
                 <div className="flex items-center gap-4">
                   <div className="flex items-center gap-3">
