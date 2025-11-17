@@ -27,80 +27,101 @@ export default function Home() {
           }}></div>
         </div>
 
-        {/* Floating Dashboard Panels */}
+        {/* Floating Application Form Panels */}
         <div className="absolute inset-0 -z-5 pointer-events-none">
-          {/* Panel 1 - Analytics */}
+          {/* Panel 1 - Helper Application */}
           <div className="floating-panel absolute top-20 right-20 w-64 h-40 render-panel opacity-60">
             <div className="flex items-center gap-2 mb-3">
               <div className="w-2 h-2 bg-[#00FF8C] rounded-full"></div>
-              <span className="text-xs text-gray-400 font-medium">Analytics</span>
-            </div>
-            <div className="space-y-2">
-              <div className="flex justify-between text-xs">
-                <span className="text-gray-500">Active Users</span>
-                <span className="text-[#00E6F6]">2,847</span>
-              </div>
-              <div className="w-full h-1 bg-gray-800 rounded-full overflow-hidden">
-                <div className="w-3/4 h-full bg-gradient-to-r from-[#00E6F6] to-[#9A4DFF] rounded-full"></div>
-              </div>
-              <div className="flex gap-1 mt-3">
-                {[...Array(12)].map((_, i) => (
-                  <div key={i} className="w-1 bg-gray-700 rounded-full" style={{height: `${Math.random() * 20 + 5}px`}}></div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Panel 2 - Code Snippet */}
-          <div className="floating-panel absolute top-40 right-80 w-72 h-32 render-panel opacity-50">
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-2 h-2 bg-[#9A4DFF] rounded-full"></div>
-              <span className="text-xs text-gray-400 font-medium">Deploy Status</span>
-            </div>
-            <div className="font-mono text-xs space-y-1">
-              <div className="text-gray-500">$ npm run build</div>
-              <div className="text-[#00FF8C]">✓ Build completed</div>
-              <div className="text-[#00E6F6]">→ Deploying to production...</div>
-              <div className="text-gray-400">⏱ 2.3s</div>
-            </div>
-          </div>
-
-          {/* Panel 3 - Metrics */}
-          <div className="floating-panel absolute bottom-40 right-32 w-48 h-36 render-panel opacity-70">
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-2 h-2 bg-[#00E6F6] rounded-full"></div>
-              <span className="text-xs text-gray-400 font-medium">Performance</span>
+              <span className="text-xs text-gray-400 font-medium">Helper Application</span>
             </div>
             <div className="space-y-3">
-              <div className="flex justify-between items-center">
-                <span className="text-xs text-gray-500">Response Time</span>
-                <span className="text-xs text-[#00FF8C]">23ms</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-xs text-gray-500">Uptime</span>
-                <span className="text-xs text-[#00FF8C]">99.9%</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-xs text-gray-500">Requests/min</span>
-                <span className="text-xs text-[#00E6F6]">1.2k</span>
+              <div className="text-xs text-gray-300">Join our staff team as Helper</div>
+              <div className="space-y-2">
+                <div className="flex justify-between text-xs">
+                  <span className="text-gray-500">Age Requirement</span>
+                  <span className="text-[#00FF8C]">13+</span>
+                </div>
+                <div className="flex justify-between text-xs">
+                  <span className="text-gray-500">Microphone</span>
+                  <span className="text-[#00E6F6]">Required</span>
+                </div>
+                <div className="flex justify-between text-xs">
+                  <span className="text-gray-500">Experience</span>
+                  <span className="text-[#9A4DFF]">Any Level</span>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Panel 4 - Mini Chart */}
-          <div className="floating-panel absolute bottom-20 right-12 w-56 h-28 render-panel opacity-55">
+          {/* Panel 2 - Developer Application */}
+          <div className="floating-panel absolute top-40 right-80 w-72 h-36 render-panel opacity-50">
             <div className="flex items-center gap-2 mb-3">
               <div className="w-2 h-2 bg-[#9A4DFF] rounded-full"></div>
-              <span className="text-xs text-gray-400 font-medium">Traffic</span>
+              <span className="text-xs text-gray-400 font-medium">Developer Application</span>
             </div>
-            <div className="flex items-end gap-1 h-12">
-              {[...Array(20)].map((_, i) => (
-                <div 
-                  key={i} 
-                  className="flex-1 bg-gradient-to-t from-[#9A4DFF]/30 to-[#00E6F6]/30 rounded-sm"
-                  style={{height: `${Math.random() * 100 + 10}%`}}
-                ></div>
-              ))}
+            <div className="space-y-3">
+              <div className="text-xs text-gray-300">Build the future with code</div>
+              <div className="space-y-2">
+                <div className="flex justify-between text-xs">
+                  <span className="text-gray-500">Languages</span>
+                  <span className="text-[#00E6F6]">Java, JS, Python</span>
+                </div>
+                <div className="flex justify-between text-xs">
+                  <span className="text-gray-500">Portfolio</span>
+                  <span className="text-[#00FF8C]">Required</span>
+                </div>
+                <div className="flex justify-between text-xs">
+                  <span className="text-gray-500">Projects</span>
+                  <span className="text-[#9A4DFF]">Bots, Plugins</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Panel 3 - Dungeon Carry Application */}
+          <div className="floating-panel absolute bottom-40 right-32 w-56 h-36 render-panel opacity-70">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-2 h-2 bg-[#FF6B35] rounded-full"></div>
+              <span className="text-xs text-gray-400 font-medium">Dungeon Carry</span>
+            </div>
+            <div className="space-y-3">
+              <div className="text-xs text-gray-300">Elite dungeon specialist</div>
+              <div className="space-y-2">
+                <div className="flex justify-between text-xs">
+                  <span className="text-gray-500">Skill Level</span>
+                  <span className="text-[#FF6B35]">Expert</span>
+                </div>
+                <div className="flex justify-between text-xs">
+                  <span className="text-gray-500">Availability</span>
+                  <span className="text-[#00E6F6]">Flexible</span>
+                </div>
+                <div className="flex justify-between text-xs">
+                  <span className="text-gray-500">Rewards</span>
+                  <span className="text-[#00FF8C]">Premium</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Panel 4 - Slayer Application */}
+          <div className="floating-panel absolute bottom-20 right-12 w-52 h-32 render-panel opacity-55">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-2 h-2 bg-[#FF1744] rounded-full"></div>
+              <span className="text-xs text-gray-400 font-medium">Slayer</span>
+            </div>
+            <div className="space-y-3">
+              <div className="text-xs text-gray-300">Combat specialist</div>
+              <div className="space-y-2">
+                <div className="flex justify-between text-xs">
+                  <span className="text-gray-500">Combat Skills</span>
+                  <span className="text-[#FF1744]">Elite</span>
+                </div>
+                <div className="flex justify-between text-xs">
+                  <span className="text-gray-500">Boss Fights</span>
+                  <span className="text-[#00E6F6]">Expert</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
