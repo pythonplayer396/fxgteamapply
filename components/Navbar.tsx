@@ -54,11 +54,15 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 group">
-            <div className="w-11 h-11 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg shadow-purple-500/50">
-              <span className="text-white font-black text-xl">F</span>
+            <div className="w-11 h-11 rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 overflow-hidden">
+              <img 
+                src="/logo.gif" 
+                alt="FakePixel x Giveaway Logo" 
+                className="w-full h-full object-cover rounded-2xl"
+              />
             </div>
             <span className="text-2xl font-black hidden sm:block gradient-text">
-              FxG
+              FakePixel x Giveaway
             </span>
           </Link>
 

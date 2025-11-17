@@ -8,8 +8,8 @@ import { Providers } from './providers'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'FakePixel X Giveaways',
-  description: 'Application portal for FakePixel X Giveaways Discord server',
+  title: 'FakePixel x Giveaway - Staff Applications',
+  description: 'Join the FakePixel x Giveaway staff team - Apply for Helper, Developer, Slayer, or Dungeon Carry positions',
 }
 
 export default function RootLayout({
@@ -27,6 +27,7 @@ export default function RootLayout({
           </main>
           <Footer />
         </Providers>
+        <script src="/drag-effect.js" defer></script>
       </body>
     </html>
   )

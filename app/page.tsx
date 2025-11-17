@@ -135,7 +135,7 @@ export default function Home() {
             </div>
             
             <h1 className="render-title text-[var(--text-primary)] mb-6">
-              Join <span style={{color: 'var(--accent-purple)'}}>FxG</span>
+              Join <span style={{color: 'var(--accent-purple)'}}>FakePixel x Giveaway</span> Staff Team
             </h1>
             
             <p className="render-subtitle mb-12 max-w-lg">

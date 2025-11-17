@@ -459,3 +459,42 @@ body::after {
   color: var(--text-secondary);
   line-height: 1.6;
 }
+
+/* Tab Bar Purple Drag Effect */
+html {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+/* Purple drag effect for tab bar */
+*::selection {
+  background-color: var(--accent-purple);
+  color: white;
+}
+
+*::-moz-selection {
+  background-color: var(--accent-purple);
+  color: white;
+}
+
+/* Custom drag cursor */
+html.dragging {
+  cursor: grabbing !important;
+}
+
+html.dragging * {
+  cursor: grabbing !important;
+}
+
+/* Purple highlight on drag */
+.drag-highlight {
+  background-color: var(--accent-purple) !important;
+  color: white !important;
+  transition: all 0.2s ease;
+}
