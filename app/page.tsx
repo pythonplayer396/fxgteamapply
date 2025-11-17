@@ -30,96 +30,96 @@ export default function Home() {
         {/* Floating Application Form Panels */}
         <div className="absolute inset-0 -z-5 pointer-events-none">
           {/* Panel 1 - Helper Application */}
-          <div className="floating-panel absolute top-20 right-20 w-64 h-40 render-panel opacity-60">
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-2 h-2 bg-[#00FF8C] rounded-full"></div>
-              <span className="text-xs text-gray-400 font-medium">Helper Application</span>
+          <div className="floating-panel absolute top-16 right-16 w-80 h-48 render-panel opacity-85">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-3 h-3 bg-[#00FF8C] rounded-full animate-pulse"></div>
+              <span className="text-sm text-gray-300 font-semibold">Helper Application</span>
             </div>
-            <div className="space-y-3">
-              <div className="text-xs text-gray-300">Join our staff team as Helper</div>
-              <div className="space-y-2">
-                <div className="flex justify-between text-xs">
-                  <span className="text-gray-500">Age Requirement</span>
-                  <span className="text-[#00FF8C]">13+</span>
+            <div className="space-y-4">
+              <div className="text-sm text-gray-200 font-medium">Join our staff team as Helper</div>
+              <div className="space-y-3">
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-400">Age Requirement</span>
+                  <span className="text-[#00FF8C] font-semibold">13+</span>
                 </div>
-                <div className="flex justify-between text-xs">
-                  <span className="text-gray-500">Microphone</span>
-                  <span className="text-[#00E6F6]">Required</span>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-400">Microphone</span>
+                  <span className="text-[#00E6F6] font-semibold">Required</span>
                 </div>
-                <div className="flex justify-between text-xs">
-                  <span className="text-gray-500">Experience</span>
-                  <span className="text-[#9A4DFF]">Any Level</span>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-400">Experience</span>
+                  <span className="text-[#9A4DFF] font-semibold">Any Level</span>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Panel 2 - Developer Application */}
-          <div className="floating-panel absolute top-40 right-80 w-72 h-36 render-panel opacity-50">
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-2 h-2 bg-[#9A4DFF] rounded-full"></div>
-              <span className="text-xs text-gray-400 font-medium">Developer Application</span>
+          <div className="floating-panel absolute top-32 right-96 w-84 h-44 render-panel opacity-80">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-3 h-3 bg-[#9A4DFF] rounded-full animate-pulse"></div>
+              <span className="text-sm text-gray-300 font-semibold">Developer Application</span>
             </div>
-            <div className="space-y-3">
-              <div className="text-xs text-gray-300">Build the future with code</div>
-              <div className="space-y-2">
-                <div className="flex justify-between text-xs">
-                  <span className="text-gray-500">Languages</span>
-                  <span className="text-[#00E6F6]">Java, JS, Python</span>
+            <div className="space-y-4">
+              <div className="text-sm text-gray-200 font-medium">Build the future with code</div>
+              <div className="space-y-3">
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-400">Languages</span>
+                  <span className="text-[#00E6F6] font-semibold">Java, JS, Python</span>
                 </div>
-                <div className="flex justify-between text-xs">
-                  <span className="text-gray-500">Portfolio</span>
-                  <span className="text-[#00FF8C]">Required</span>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-400">Portfolio</span>
+                  <span className="text-[#00FF8C] font-semibold">Required</span>
                 </div>
-                <div className="flex justify-between text-xs">
-                  <span className="text-gray-500">Projects</span>
-                  <span className="text-[#9A4DFF]">Bots, Plugins</span>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-400">Projects</span>
+                  <span className="text-[#9A4DFF] font-semibold">Bots, Plugins</span>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Panel 3 - Dungeon Carry Application */}
-          <div className="floating-panel absolute bottom-40 right-32 w-56 h-36 render-panel opacity-70">
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-2 h-2 bg-[#FF6B35] rounded-full"></div>
-              <span className="text-xs text-gray-400 font-medium">Dungeon Carry</span>
+          <div className="floating-panel absolute bottom-32 right-24 w-72 h-44 render-panel opacity-90">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-3 h-3 bg-[#FF6B35] rounded-full animate-pulse"></div>
+              <span className="text-sm text-gray-300 font-semibold">Dungeon Carry</span>
             </div>
-            <div className="space-y-3">
-              <div className="text-xs text-gray-300">Elite dungeon specialist</div>
-              <div className="space-y-2">
-                <div className="flex justify-between text-xs">
-                  <span className="text-gray-500">Skill Level</span>
-                  <span className="text-[#FF6B35]">Expert</span>
+            <div className="space-y-4">
+              <div className="text-sm text-gray-200 font-medium">Elite dungeon specialist</div>
+              <div className="space-y-3">
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-400">Skill Level</span>
+                  <span className="text-[#FF6B35] font-semibold">Expert</span>
                 </div>
-                <div className="flex justify-between text-xs">
-                  <span className="text-gray-500">Availability</span>
-                  <span className="text-[#00E6F6]">Flexible</span>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-400">Availability</span>
+                  <span className="text-[#00E6F6] font-semibold">Flexible</span>
                 </div>
-                <div className="flex justify-between text-xs">
-                  <span className="text-gray-500">Rewards</span>
-                  <span className="text-[#00FF8C]">Premium</span>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-400">Rewards</span>
+                  <span className="text-[#00FF8C] font-semibold">Premium</span>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Panel 4 - Slayer Application */}
-          <div className="floating-panel absolute bottom-20 right-12 w-52 h-32 render-panel opacity-55">
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-2 h-2 bg-[#FF1744] rounded-full"></div>
-              <span className="text-xs text-gray-400 font-medium">Slayer</span>
+          <div className="floating-panel absolute bottom-16 right-8 w-68 h-40 render-panel opacity-85">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-3 h-3 bg-[#FF1744] rounded-full animate-pulse"></div>
+              <span className="text-sm text-gray-300 font-semibold">Slayer</span>
             </div>
-            <div className="space-y-3">
-              <div className="text-xs text-gray-300">Combat specialist</div>
-              <div className="space-y-2">
-                <div className="flex justify-between text-xs">
-                  <span className="text-gray-500">Combat Skills</span>
-                  <span className="text-[#FF1744]">Elite</span>
+            <div className="space-y-4">
+              <div className="text-sm text-gray-200 font-medium">Combat specialist</div>
+              <div className="space-y-3">
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-400">Combat Skills</span>
+                  <span className="text-[#FF1744] font-semibold">Elite</span>
                 </div>
-                <div className="flex justify-between text-xs">
-                  <span className="text-gray-500">Boss Fights</span>
-                  <span className="text-[#00E6F6]">Expert</span>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-400">Boss Fights</span>
+                  <span className="text-[#00E6F6] font-semibold">Expert</span>
                 </div>
               </div>
             </div>
@@ -134,8 +134,12 @@ export default function Home() {
               <span className="text-sm font-medium text-[var(--text-secondary)]">Now Hiring</span>
             </div>
             
-            <h1 className="render-title text-[var(--text-primary)] mb-6">
-              Join <span style={{color: 'var(--accent-purple)'}}>FakePixel x Giveaway</span> Staff Team
+            <h1 className="render-title text-[var(--text-primary)] mb-6 leading-tight">
+              <div>Join</div>
+              <div className="pl-8 whitespace-nowrap">
+                <span style={{color: 'var(--accent-purple)'}}>FakePixel x Giveaways</span>
+              </div>
+              <div className="pl-24">Staff Team</div>
             </h1>
             
             <p className="render-subtitle mb-12 max-w-lg">
