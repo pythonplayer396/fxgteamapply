@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 
 export async function GET() {
   try {
-    const botApiUrl = process.env.BOT_API_URL || 'https://idk-rx11.onrender.com'
+    const botApiUrl = process.env.BOT_API_URL || 'https://api-dgm0.onrender.com'
     // Use /ping endpoint for lightweight keep-alive
     const pingUrl = `${botApiUrl}/ping`
     

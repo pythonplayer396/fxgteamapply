@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     }
 
     // Call bot API
-    const botApiUrl = process.env.BOT_API_URL || 'https://fxg-bot-api.onrender.com'
+    const botApiUrl = process.env.BOT_API_URL || 'https://api-dgm0.onrender.com'
     const botApiSecret = process.env.BOT_API_SECRET
 
     console.log('Bot API URL:', botApiUrl)
