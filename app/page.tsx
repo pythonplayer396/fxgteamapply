@@ -30,78 +30,30 @@ export default function Home() {
         {/* Floating Application Form Panels */}
         <div className="absolute inset-0 -z-5 pointer-events-none">
           {/* Panel 1 - Helper Application */}
-          <div className="floating-panel absolute top-16 right-16 w-80 h-48 render-panel opacity-85">
+          <div className="floating-panel absolute top-16 right-16 w-80 h-40 render-panel opacity-85">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-3 h-3 bg-[#00FF8C] rounded-full animate-pulse"></div>
               <span className="text-sm text-gray-300 font-semibold">Helper Application</span>
             </div>
-            <div className="space-y-4">
-              <div className="text-sm text-gray-200 font-medium">Join our staff team as Helper</div>
-              <div className="space-y-3">
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-400">Age Requirement</span>
-                  <span className="text-[#00FF8C] font-semibold">13+</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-400">Microphone</span>
-                  <span className="text-[#00E6F6] font-semibold">Required</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-400">Experience</span>
-                  <span className="text-[#9A4DFF] font-semibold">Any Level</span>
-                </div>
-              </div>
-            </div>
+            <div className="text-sm text-gray-400">Join our staff team as Helper</div>
           </div>
 
           {/* Panel 2 - Developer Application */}
-          <div className="floating-panel absolute top-32 right-96 w-84 h-44 render-panel opacity-80">
+          <div className="floating-panel absolute top-32 right-96 w-84 h-40 render-panel opacity-80">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-3 h-3 bg-[#9A4DFF] rounded-full animate-pulse"></div>
               <span className="text-sm text-gray-300 font-semibold">Developer Application</span>
             </div>
-            <div className="space-y-4">
-              <div className="text-sm text-gray-200 font-medium">Build the future with code</div>
-              <div className="space-y-3">
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-400">Languages</span>
-                  <span className="text-[#00E6F6] font-semibold">Java, JS, Python</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-400">Portfolio</span>
-                  <span className="text-[#00FF8C] font-semibold">Required</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-400">Projects</span>
-                  <span className="text-[#9A4DFF] font-semibold">Bots, Plugins</span>
-                </div>
-              </div>
-            </div>
+            <div className="text-sm text-gray-400">Build the future with code</div>
           </div>
 
           {/* Panel 3 - Dungeon Carry Application */}
-          <div className="floating-panel absolute bottom-32 right-24 w-72 h-44 render-panel opacity-90">
+          <div className="floating-panel absolute bottom-32 right-24 w-72 h-40 render-panel opacity-90">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-3 h-3 bg-[#FF6B35] rounded-full animate-pulse"></div>
               <span className="text-sm text-gray-300 font-semibold">Dungeon Carry</span>
             </div>
-            <div className="space-y-4">
-              <div className="text-sm text-gray-200 font-medium">Elite dungeon specialist</div>
-              <div className="space-y-3">
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-400">Skill Level</span>
-                  <span className="text-[#FF6B35] font-semibold">Expert</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-400">Availability</span>
-                  <span className="text-[#00E6F6] font-semibold">Flexible</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-400">Rewards</span>
-                  <span className="text-[#00FF8C] font-semibold">Premium</span>
-                </div>
-              </div>
-            </div>
+            <div className="text-sm text-gray-400">Elite dungeon specialist</div>
           </div>
 
           {/* Panel 4 - Slayer Application */}
@@ -110,19 +62,7 @@ export default function Home() {
               <div className="w-3 h-3 bg-[#FF1744] rounded-full animate-pulse"></div>
               <span className="text-sm text-gray-300 font-semibold">Slayer</span>
             </div>
-            <div className="space-y-4">
-              <div className="text-sm text-gray-200 font-medium">Combat specialist</div>
-              <div className="space-y-3">
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-400">Combat Skills</span>
-                  <span className="text-[#FF1744] font-semibold">Elite</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-400">Boss Fights</span>
-                  <span className="text-[#00E6F6] font-semibold">Expert</span>
-                </div>
-              </div>
-            </div>
+            <div className="text-sm text-gray-400">Combat specialist</div>
           </div>
         </div>
 

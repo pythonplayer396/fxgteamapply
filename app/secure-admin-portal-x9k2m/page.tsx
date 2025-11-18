@@ -286,12 +286,37 @@ export default function AdminDashboard() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen pt-32 pb-20 px-4 flex items-center justify-center">
-        <div className="glass-card max-w-md w-full">
-          <Shield className="w-16 h-16 text-discord-blurple mx-auto mb-6" />
-          <h1 className="text-3xl font-bold text-center mb-6">Admin Login</h1>
+      <div className="min-h-screen relative flex items-center justify-center px-4 overflow-hidden">
+        {/* 3D Grid Background */}
+        <div className="absolute inset-0 -z-10">
+          <div className="render-grid"></div>
+          <div className="grid-sweep"></div>
+          {/* Film grain overlay */}
+          <div className="absolute inset-0 opacity-[0.015]" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
+          }}></div>
+        </div>
+
+        {/* Floating Panels */}
+        <div className="absolute inset-0 -z-5 pointer-events-none">
+          <div className="floating-panel absolute top-16 right-16 w-80 h-40 render-panel opacity-85">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-3 h-3 bg-[var(--accent-purple)] rounded-full animate-pulse"></div>
+              <span className="text-sm text-gray-300 font-semibold">Admin Portal</span>
+            </div>
+            <div className="text-sm text-gray-400">Secure access</div>
+          </div>
+        </div>
+
+        <div className="render-panel max-w-md w-full fade-in-up">
+          <div className="flex items-center justify-center mb-6">
+            <div className="w-16 h-16 bg-[var(--accent-purple)]/20 rounded-xl flex items-center justify-center border border-[var(--accent-purple)]/30">
+              <Shield className="w-8 h-8 text-[var(--accent-purple)]" />
+            </div>
+          </div>
+          <h1 className="render-title text-center mb-6">Admin Login</h1>
           {loginError && (
-            <div className="bg-red-500/20 border border-red-500 text-red-500 px-4 py-3 rounded-lg mb-4">
+            <div className="bg-[#FF1744]/20 border border-[#FF1744] text-[#FF1744] px-4 py-3 mb-4">
               {loginError}
             </div>
           )}
@@ -324,7 +349,7 @@ export default function AdminDashboard() {
                 required
               />
             </div>
-            <button type="submit" className="btn-primary w-full">Login</button>
+            <button type="submit" className="btn-render-primary w-full">Login</button>
           </form>
         </div>
       </div>
@@ -362,95 +387,126 @@ export default function AdminDashboard() {
   })
 
   return (
-    <div className="min-h-screen pt-32 pb-20 px-4">
-      <div className="max-w-7xl mx-auto">
-        {/* Success Message */}
-        {successMessage && (
-          <div className="fixed top-24 right-4 z-50 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg animate-slide-up">
-            ✓ {successMessage}
-          </div>
-        )}
-
-        {/* Loading Overlay */}
-        {loading && (
-          <div className="fixed inset-0 bg-black/50 z-40 flex items-center justify-center">
-            <div className="bg-discord-dark border border-discord-blurple rounded-lg p-6">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-discord-blurple mx-auto"></div>
-              <p className="text-white mt-4">Processing...</p>
-            </div>
-          </div>
-        )}
-
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-4">
-            <Shield className="w-12 h-12 text-discord-blurple" />
-            <div>
-              <h1 className="text-4xl font-bold">Admin Dashboard</h1>
-              <p className="text-gray-400">{stats.total} total applications</p>
-            </div>
-          </div>
-          <button onClick={handleLogout} className="btn-secondary">
-            Logout
-          </button>
+    <div className="min-h-screen relative">
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-start px-4 overflow-hidden pt-32 pb-20">
+        {/* 3D Grid Background */}
+        <div className="absolute inset-0 -z-10">
+          <div className="render-grid"></div>
+          <div className="grid-sweep"></div>
+          {/* Film grain overlay */}
+          <div className="absolute inset-0 opacity-[0.015]" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
+          }}></div>
         </div>
 
-        {/* Stats Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
-          <button
-            onClick={() => setActiveTab('all')}
-            className={`bg-discord-dark border rounded-lg p-4 text-left transition-all hover:scale-105 ${
-              activeTab === 'all' ? 'border-white/40 ring-2 ring-white/20' : 'border-white/10'
-            }`}
-          >
-            <p className="text-gray-400 text-sm mb-1">Total</p>
-            <p className="text-3xl font-bold">{stats.total}</p>
-          </button>
-          <button
-            onClick={() => setActiveTab('pending')}
-            className={`bg-discord-dark border rounded-lg p-4 text-left transition-all hover:scale-105 ${
-              activeTab === 'pending' ? 'border-yellow-500/60 ring-2 ring-yellow-500/30' : 'border-yellow-500/20'
-            }`}
-          >
-            <p className="text-yellow-500 text-sm mb-1">Pending</p>
-            <p className="text-3xl font-bold text-yellow-500">{stats.pending}</p>
-          </button>
-          <button
-            onClick={() => setActiveTab('interview')}
-            className={`bg-discord-dark border rounded-lg p-4 text-left transition-all hover:scale-105 ${
-              activeTab === 'interview' ? 'border-blue-500/60 ring-2 ring-blue-500/30' : 'border-blue-500/20'
-            }`}
-          >
-            <p className="text-blue-500 text-sm mb-1">Interview</p>
-            <p className="text-3xl font-bold text-blue-500">{stats.interview}</p>
-          </button>
-          <button
-            onClick={() => setActiveTab('approved')}
-            className={`bg-discord-dark border rounded-lg p-4 text-left transition-all hover:scale-105 ${
-              activeTab === 'approved' ? 'border-green-500/60 ring-2 ring-green-500/30' : 'border-green-500/20'
-            }`}
-          >
-            <p className="text-green-500 text-sm mb-1">Approved</p>
-            <p className="text-3xl font-bold text-green-500">{stats.approved}</p>
-          </button>
-          <button
-            onClick={() => setActiveTab('denied')}
-            className={`bg-discord-dark border rounded-lg p-4 text-left transition-all hover:scale-105 ${
-              activeTab === 'denied' ? 'border-red-500/60 ring-2 ring-red-500/30' : 'border-red-500/20'
-            }`}
-          >
-            <p className="text-red-500 text-sm mb-1">Denied</p>
-            <p className="text-3xl font-bold text-red-500">{stats.denied}</p>
-          </button>
-          <button
-            onClick={() => setActiveTab('interview_failed')}
-            className={`bg-discord-dark border rounded-lg p-4 text-left transition-all hover:scale-105 ${
-              activeTab === 'interview_failed' ? 'border-orange-500/60 ring-2 ring-orange-500/30' : 'border-orange-500/20'
-            }`}
-          >
-            <p className="text-orange-500 text-sm mb-1">Interview Failed</p>
-            <p className="text-3xl font-bold text-orange-500">{stats.interviewFailed}</p>
-          </button>
+        {/* Floating Panels */}
+        <div className="absolute inset-0 -z-5 pointer-events-none">
+          <div className="floating-panel absolute top-16 right-16 w-80 h-40 render-panel opacity-85">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-3 h-3 bg-[var(--accent-purple)] rounded-full animate-pulse"></div>
+              <span className="text-sm text-gray-300 font-semibold">Admin Portal</span>
+            </div>
+            <div className="text-sm text-gray-400">Manage applications</div>
+          </div>
         </div>
+
+        <div className="max-w-7xl mx-auto w-full">
+          {/* Success Message */}
+          {successMessage && (
+            <div className="fixed top-24 right-4 z-50 bg-[var(--accent-green)] text-white px-6 py-3 shadow-lg fade-in-up">
+              ✓ {successMessage}
+            </div>
+          )}
+
+          {/* Loading Overlay */}
+          {loading && (
+            <div className="fixed inset-0 bg-black/50 z-40 flex items-center justify-center">
+              <div className="render-panel p-6">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--accent-cyan)] mx-auto"></div>
+                <p className="text-[var(--text-primary)] mt-4">Processing...</p>
+              </div>
+            </div>
+          )}
+
+          <div className="flex items-center justify-between mb-8 fade-in-up">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-[var(--accent-purple)]/20 rounded-xl flex items-center justify-center border border-[var(--accent-purple)]/30">
+                <Shield className="w-6 h-6 text-[var(--accent-purple)]" />
+              </div>
+              <div>
+                <h1 className="render-title">Admin Dashboard</h1>
+                <p className="render-subtitle">{stats.total} total applications</p>
+              </div>
+            </div>
+            <button onClick={handleLogout} className="btn-render-secondary">
+              Logout
+            </button>
+          </div>
+
+          {/* Stats Cards */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
+            <button
+              onClick={() => setActiveTab('all')}
+              className={`render-panel p-4 text-left fade-in-up transition-all ${
+                activeTab === 'all' ? 'border-[var(--accent-cyan)] border-2' : ''
+              }`}
+              style={{animationDelay: '0.1s'}}
+            >
+              <p className="text-[var(--text-secondary)] text-sm mb-1">Total</p>
+              <p className="text-3xl font-bold text-[var(--text-primary)]">{stats.total}</p>
+            </button>
+            <button
+              onClick={() => setActiveTab('pending')}
+              className={`render-panel p-4 text-left fade-in-up border-l-4 transition-all ${
+                activeTab === 'pending' ? 'border-l-[#FF6B35]' : 'border-l-[#FF6B35]/30'
+              }`}
+              style={{animationDelay: '0.2s'}}
+            >
+              <p className="text-[#FF6B35] text-sm mb-1">Pending</p>
+              <p className="text-3xl font-bold text-[#FF6B35]">{stats.pending}</p>
+            </button>
+            <button
+              onClick={() => setActiveTab('interview')}
+              className={`render-panel p-4 text-left fade-in-up border-l-4 transition-all ${
+                activeTab === 'interview' ? 'border-l-[var(--accent-cyan)]' : 'border-l-[var(--accent-cyan)]/30'
+              }`}
+              style={{animationDelay: '0.3s'}}
+            >
+              <p className="text-[var(--accent-cyan)] text-sm mb-1">Interview</p>
+              <p className="text-3xl font-bold text-[var(--accent-cyan)]">{stats.interview}</p>
+          </button>
+            <button
+              onClick={() => setActiveTab('approved')}
+              className={`render-panel p-4 text-left fade-in-up border-l-4 transition-all ${
+                activeTab === 'approved' ? 'border-l-[var(--accent-green)]' : 'border-l-[var(--accent-green)]/30'
+              }`}
+              style={{animationDelay: '0.4s'}}
+            >
+              <p className="text-[var(--accent-green)] text-sm mb-1">Approved</p>
+              <p className="text-3xl font-bold text-[var(--accent-green)]">{stats.approved}</p>
+            </button>
+            <button
+              onClick={() => setActiveTab('denied')}
+              className={`render-panel p-4 text-left fade-in-up border-l-4 transition-all ${
+                activeTab === 'denied' ? 'border-l-[#FF1744]' : 'border-l-[#FF1744]/30'
+              }`}
+              style={{animationDelay: '0.5s'}}
+            >
+              <p className="text-[#FF1744] text-sm mb-1">Denied</p>
+              <p className="text-3xl font-bold text-[#FF1744]">{stats.denied}</p>
+            </button>
+            <button
+              onClick={() => setActiveTab('interview_failed')}
+              className={`render-panel p-4 text-left fade-in-up border-l-4 transition-all ${
+                activeTab === 'interview_failed' ? 'border-l-[#FF6B35]' : 'border-l-[#FF6B35]/30'
+              }`}
+              style={{animationDelay: '0.6s'}}
+            >
+              <p className="text-[#FF6B35] text-sm mb-1">Interview Failed</p>
+              <p className="text-3xl font-bold text-[#FF6B35]">{stats.interviewFailed}</p>
+            </button>
+          </div>
 
         {/* Category Filter */}
         <div className="mb-6">
@@ -459,7 +515,7 @@ export default function AdminDashboard() {
             <button
               onClick={() => setCategoryFilter('all')}
               className={`px-4 py-2 rounded-lg font-semibold transition-all ${
-                categoryFilter === 'all' ? 'bg-purple-500 text-white' : 'bg-discord-dark border border-white/10 hover:border-purple-500/50'
+                categoryFilter === 'all' ? 'bg-[var(--accent-purple)] text-white' : 'render-panel border border-[var(--border-panel)] hover:border-[var(--accent-purple)]/50'
               }`}
             >
               All ({stats.total})
@@ -467,7 +523,7 @@ export default function AdminDashboard() {
             <button
               onClick={() => setCategoryFilter('helper')}
               className={`px-4 py-2 rounded-lg font-semibold transition-all ${
-                categoryFilter === 'helper' ? 'bg-green-500 text-white' : 'bg-discord-dark border border-white/10 hover:border-green-500/50'
+                categoryFilter === 'helper' ? 'bg-[var(--accent-green)] text-white' : 'render-panel border border-[var(--border-panel)] hover:border-[var(--accent-green)]/50'
               }`}
             >
               Helper ({stats.helper})
@@ -475,7 +531,7 @@ export default function AdminDashboard() {
             <button
               onClick={() => setCategoryFilter('developer')}
               className={`px-4 py-2 rounded-lg font-semibold transition-all ${
-                categoryFilter === 'developer' ? 'bg-blue-500 text-white' : 'bg-discord-dark border border-white/10 hover:border-blue-500/50'
+                categoryFilter === 'developer' ? 'bg-[var(--accent-cyan)] text-white' : 'render-panel border border-[var(--border-panel)] hover:border-[var(--accent-cyan)]/50'
               }`}
             >
               Developer ({stats.developer})
@@ -483,7 +539,7 @@ export default function AdminDashboard() {
             <button
               onClick={() => setCategoryFilter('slayer')}
               className={`px-4 py-2 rounded-lg font-semibold transition-all ${
-                categoryFilter === 'slayer' ? 'bg-red-500 text-white' : 'bg-discord-dark border border-white/10 hover:border-red-500/50'
+                categoryFilter === 'slayer' ? 'bg-[#FF1744] text-white' : 'render-panel border border-[var(--border-panel)] hover:border-[#FF1744]/50'
               }`}
             >
               Slayer ({stats.slayer})
@@ -491,7 +547,7 @@ export default function AdminDashboard() {
             <button
               onClick={() => setCategoryFilter('dungeon')}
               className={`px-4 py-2 rounded-lg font-semibold transition-all ${
-                categoryFilter === 'dungeon' ? 'bg-indigo-500 text-white' : 'bg-discord-dark border border-white/10 hover:border-indigo-500/50'
+                categoryFilter === 'dungeon' ? 'bg-[#FF6B35] text-white' : 'render-panel border border-[var(--border-panel)] hover:border-[#FF6B35]/50'
               }`}
             >
               Dungeon ({stats.dungeon})
@@ -499,7 +555,7 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        <div className="glass-card mb-6">
+          <div className="render-panel mb-6 fade-in-up" style={{animationDelay: '0.7s'}}>
           <div className="flex gap-4">
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-3.5 w-5 h-5 text-gray-400" />
@@ -512,11 +568,11 @@ export default function AdminDashboard() {
               />
             </div>
             <div className="flex gap-2">
-              <button onClick={exportToJSON} className="btn-primary flex items-center gap-2">
+              <button onClick={exportToJSON} className="btn-render-primary flex items-center gap-2">
                 <Download className="w-5 h-5" />
                 JSON
               </button>
-              <button onClick={exportToCSV} className="btn-secondary flex items-center gap-2">
+              <button onClick={exportToCSV} className="btn-render-secondary flex items-center gap-2">
                 <Download className="w-5 h-5" />
                 CSV
               </button>
@@ -534,7 +590,7 @@ export default function AdminDashboard() {
               <div
                 key={app.id}
                 onClick={() => setSelectedApp(app)}
-                className={`glass-card cursor-pointer transition-all ${
+                className={`render-panel cursor-pointer transition-all ${
                   selectedApp?.id === app.id ? 'border-discord-blurple' : ''
                 }`}
               >
@@ -560,7 +616,7 @@ export default function AdminDashboard() {
           </div>
 
           {selectedApp && (
-            <div className="glass-card sticky top-24">
+            <div className="render-panel sticky top-24">
               {/* Header with Profile Picture and Name */}
               <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
                 <div className="flex items-center gap-4">
@@ -671,7 +727,7 @@ export default function AdminDashboard() {
                     <button
                       onClick={() => updateStatus(selectedApp.id, 'interview')}
                       disabled={loading}
-                      className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="btn-render-primary w-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <CheckCircle className="w-5 h-5" />
                       Take for Interview
@@ -713,7 +769,7 @@ export default function AdminDashboard() {
                 <button
                   onClick={() => deleteApplication(selectedApp.id)}
                   disabled={loading}
-                  className="btn-secondary w-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="btn-render-secondary w-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Trash2 className="w-5 h-5" />
                   Delete Application
@@ -722,7 +778,8 @@ export default function AdminDashboard() {
             </div>
           )}
         </div>
-      </div>
+        </div>
+      </section>
     </div>
   )
 }

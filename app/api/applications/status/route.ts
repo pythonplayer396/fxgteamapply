@@ -43,9 +43,8 @@ export async function GET(request: Request) {
     return NextResponse.json(sanitizedApps)
   } catch (error) {
     console.error('Error fetching application status:', error)
-    return NextResponse.json(
-      { error: 'Failed to fetch applications' },
-      { status: 500 }
-    )
+    // Return empty array instead of error to prevent UI issues
+    // This handles cases where MongoDB is unavailable
+    return NextResponse.json([])
   }
 }

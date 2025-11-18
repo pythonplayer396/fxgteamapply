@@ -56,14 +56,23 @@ export default function HelperApplicationPage() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen pt-24 pb-12 px-4 flex items-center justify-center">
-        <div className="bg-discord-dark border border-white/10 rounded-lg p-8 max-w-2xl text-center">
-          <CheckCircle className="w-16 h-16 text-discord-green mx-auto mb-4" />
-          <h1 className="text-3xl font-bold mb-3">Application Submitted!</h1>
-          <p className="text-gray-300 mb-6">
+      <div className="min-h-screen relative flex items-center justify-center px-4">
+        <div className="absolute inset-0 -z-10">
+          <div className="render-grid"></div>
+          <div className="grid-sweep"></div>
+          <div className="absolute inset-0 opacity-[0.015]" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
+          }}></div>
+        </div>
+        <div className="render-panel max-w-2xl w-full text-center fade-in-up">
+          <div className="w-16 h-16 bg-[var(--accent-green)]/20 rounded-xl flex items-center justify-center border border-[var(--accent-green)]/30 mx-auto mb-4">
+            <CheckCircle className="w-8 h-8 text-[var(--accent-green)]" />
+          </div>
+          <h1 className="render-title mb-3">Application Submitted!</h1>
+          <p className="render-subtitle mb-6">
             Thank you for applying! We'll review your application and contact you via Discord.
           </p>
-          <Link href="/" className="btn-primary inline-block">
+          <Link href="/" className="btn-render-primary inline-block">
             Return Home
           </Link>
         </div>
@@ -72,30 +81,40 @@ export default function HelperApplicationPage() {
   }
 
   return (
-    <div className="min-h-screen pt-24 pb-12 px-4">
-      <div className="max-w-3xl mx-auto">
-        <Link href="/dashboard" className="text-discord-blurple hover:underline flex items-center gap-2 text-gray-400 hover:text-white mb-6 transition-colors">
-          <ArrowLeft className="w-4 h-4" />
-          Back to Applications
-        </Link>
-
-        <div className="bg-discord-dark border border-white/10 rounded-lg p-8 mb-6">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-discord-green to-emerald-600 rounded-lg flex items-center justify-center">
-              <Users className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <h1 className="text-3xl font-bold">Helper Application</h1>
-              <p className="text-gray-400">Join our support team</p>
-            </div>
-          </div>
+    <div className="min-h-screen relative">
+      <section className="relative min-h-screen flex items-start px-4 overflow-hidden pt-32 pb-20">
+        {/* 3D Grid Background */}
+        <div className="absolute inset-0 -z-10">
+          <div className="render-grid"></div>
+          <div className="grid-sweep"></div>
+          <div className="absolute inset-0 opacity-[0.015]" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
+          }}></div>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-discord-dark border border-white/10 rounded-lg p-8 space-y-6">
+        <div className="max-w-3xl mx-auto w-full">
+          <Link href="/dashboard/applications/staff" className="flex items-center gap-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] mb-6 transition-colors fade-in-up">
+            <ArrowLeft className="w-4 h-4" />
+            Back to Applications
+          </Link>
+
+          <div className="render-panel mb-6 fade-in-up" style={{animationDelay: '0.1s'}}>
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-[var(--accent-green)]/20 rounded-xl flex items-center justify-center border border-[var(--accent-green)]/30">
+                <Users className="w-6 h-6 text-[var(--accent-green)]" />
+              </div>
+              <div>
+                <h1 className="render-title">Helper Application</h1>
+                <p className="render-subtitle">Join our support team</p>
+              </div>
+            </div>
+          </div>
+
+          <form onSubmit={handleSubmit} className="render-panel space-y-6 fade-in-up" style={{animationDelay: '0.2s'}}>
             {/* Discord info */}
-            <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 mb-6">
-              <p className="text-sm text-gray-300 mb-2">
-                <span className="font-semibold text-purple-400">Logged in as:</span> {session?.user?.name}
+            <div className="bg-[var(--accent-purple)]/10 border border-[var(--accent-purple)]/30 p-4 mb-6">
+              <p className="text-sm text-[var(--text-primary)] mb-2">
+                <span className="font-semibold text-[var(--accent-purple)]">Logged in as:</span> {session?.user?.name}
               </p>
             </div>
 
@@ -198,12 +217,13 @@ export default function HelperApplicationPage() {
               />
             </div>
 
-            <button type="submit" className="btn-primary w-full flex items-center justify-center gap-2">
+            <button type="submit" className="btn-render-primary w-full flex items-center justify-center gap-2">
               <Send className="w-5 h-5" />
               Submit Application
             </button>
           </form>
-      </div>
+        </div>
+      </section>
     </div>
   )
 }

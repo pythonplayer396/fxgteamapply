@@ -53,14 +53,23 @@ export default function DungeonCarrierApplicationPage() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen pt-24 pb-12 px-4 flex items-center justify-center">
-        <div className="bg-discord-dark border border-white/10 rounded-lg p-8 max-w-2xl text-center">
-          <CheckCircle className="w-16 h-16 text-discord-green mx-auto mb-4" />
-          <h1 className="text-3xl font-bold mb-3">Application Submitted!</h1>
-          <p className="text-gray-300 mb-6">
+      <div className="min-h-screen relative flex items-center justify-center px-4">
+        <div className="absolute inset-0 -z-10">
+          <div className="render-grid"></div>
+          <div className="grid-sweep"></div>
+          <div className="absolute inset-0 opacity-[0.015]" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
+          }}></div>
+        </div>
+        <div className="render-panel max-w-2xl w-full text-center fade-in-up">
+          <div className="w-16 h-16 bg-[var(--accent-green)]/20 rounded-xl flex items-center justify-center border border-[var(--accent-green)]/30 mx-auto mb-4">
+            <CheckCircle className="w-8 h-8 text-[var(--accent-green)]" />
+          </div>
+          <h1 className="render-title mb-3">Application Submitted!</h1>
+          <p className="render-subtitle mb-6">
             Thank you for applying! We'll review your application and contact you via Discord.
           </p>
-          <Link href="/dashboard" className="btn-primary inline-block">
+          <Link href="/dashboard" className="btn-render-primary inline-block">
             Return to Dashboard
           </Link>
         </div>
@@ -69,66 +78,76 @@ export default function DungeonCarrierApplicationPage() {
   }
 
   return (
-    <div className="min-h-screen pt-24 pb-12 px-4">
-      <div className="max-w-3xl mx-auto">
-        <Link href="/dashboard/applications/career" className="flex items-center gap-2 text-gray-400 hover:text-white mb-6 transition-colors">
-          <ArrowLeft className="w-4 h-4" />
-          Back to Career Applications
-        </Link>
-
-        <div className="bg-discord-dark border border-white/10 rounded-lg p-8 mb-6">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-lg flex items-center justify-center">
-              <Shield className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <h1 className="text-3xl font-bold">Dungeon Carrier Application</h1>
-              <p className="text-gray-400">Join our dungeon carry team</p>
-            </div>
-          </div>
+    <div className="min-h-screen relative">
+      <section className="relative min-h-screen flex items-start px-4 overflow-hidden pt-32 pb-20">
+        {/* 3D Grid Background */}
+        <div className="absolute inset-0 -z-10">
+          <div className="render-grid"></div>
+          <div className="grid-sweep"></div>
+          <div className="absolute inset-0 opacity-[0.015]" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
+          }}></div>
         </div>
 
-        {/* Important Note */}
-        <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-6 mb-6">
-          <div className="flex items-start gap-3">
-            <AlertTriangle className="w-6 h-6 text-yellow-500 flex-shrink-0 mt-0.5" />
-            <div>
-              <h3 className="font-bold text-yellow-500 mb-2">Important Note</h3>
-              <p className="text-gray-300 text-sm">
-                This role is a trusted position. You'll represent FxG in dungeon carries. Ensure you meet all requirements before applying. Failing to disclose accurate information will result in immediate rejection or blacklisted from staff team.
-              </p>
+        <div className="max-w-3xl mx-auto w-full">
+          <Link href="/dashboard/applications/career" className="flex items-center gap-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] mb-6 transition-colors fade-in-up">
+            <ArrowLeft className="w-4 h-4" />
+            Back to Career Applications
+          </Link>
+
+          <div className="render-panel mb-6 fade-in-up" style={{animationDelay: '0.1s'}}>
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-[#FF6B35]/20 rounded-xl flex items-center justify-center border border-[#FF6B35]/30">
+                <Shield className="w-6 h-6 text-[#FF6B35]" />
+              </div>
+              <div>
+                <h1 className="render-title">Dungeon Carrier Application</h1>
+                <p className="render-subtitle">Join our dungeon carry team</p>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Requirements */}
-        <div className="bg-discord-dark border border-white/10 rounded-lg p-6 mb-6">
-          <h3 className="font-bold text-lg mb-4">Requirements:</h3>
-          <ul className="space-y-2 text-gray-300">
-            <li className="flex items-start gap-2">
-              <CheckCircle className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-              <span>Minimum catacombs level 18+.</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <CheckCircle className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-              <span>Must have proficiency in at least 2 Dungeon Classes.</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <CheckCircle className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-              <span>Experience in F5–F7 & master floors preferred.</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <CheckCircle className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-              <span>Must not be part of any other server running fakepixel related giveaways strict policy.</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <CheckCircle className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-              <span>Must maintain activity and professionalism during carries.</span>
-            </li>
-          </ul>
-        </div>
+          {/* Important Note */}
+          <div className="render-panel mb-6 border-l-4 border-l-[#FF6B35] fade-in-up" style={{animationDelay: '0.2s'}}>
+            <div className="flex items-start gap-3">
+              <AlertTriangle className="w-6 h-6 text-[#FF6B35] flex-shrink-0 mt-0.5" />
+              <div>
+                <h3 className="font-bold text-[#FF6B35] mb-2">Important Note</h3>
+                <p className="text-[var(--text-secondary)] text-sm">
+                  This role is a trusted position. You'll represent FxG in dungeon carries. Ensure you meet all requirements before applying. Failing to disclose accurate information will result in immediate rejection or blacklisted from staff team.
+                </p>
+              </div>
+            </div>
+          </div>
 
-        <form onSubmit={handleSubmit} className="bg-discord-dark border border-white/10 rounded-lg p-8 space-y-6">
+          {/* Requirements */}
+          <div className="render-panel mb-6 fade-in-up" style={{animationDelay: '0.3s'}}>
+            <h3 className="font-bold text-lg mb-4 text-[var(--text-primary)]">Requirements:</h3>
+            <ul className="space-y-2 text-[var(--text-secondary)]">
+              <li className="flex items-start gap-2">
+                <CheckCircle className="w-5 h-5 text-[#FF6B35] flex-shrink-0 mt-0.5" />
+                <span>Minimum catacombs level 18+.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <CheckCircle className="w-5 h-5 text-[#FF6B35] flex-shrink-0 mt-0.5" />
+                <span>Must have proficiency in at least 2 Dungeon Classes.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <CheckCircle className="w-5 h-5 text-[#FF6B35] flex-shrink-0 mt-0.5" />
+                <span>Experience in F5–F7 & master floors preferred.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <CheckCircle className="w-5 h-5 text-[#FF6B35] flex-shrink-0 mt-0.5" />
+                <span>Must not be part of any other server running fakepixel related giveaways strict policy.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <CheckCircle className="w-5 h-5 text-[#FF6B35] flex-shrink-0 mt-0.5" />
+                <span>Must maintain activity and professionalism during carries.</span>
+              </li>
+            </ul>
+          </div>
+
+          <form onSubmit={handleSubmit} className="render-panel space-y-6 fade-in-up" style={{animationDelay: '0.4s'}}>
           <div>
             <label htmlFor="discordId" className="block text-sm font-semibold mb-2">
               Discord User ID <span className="text-red-500">*</span>
@@ -310,12 +329,13 @@ export default function DungeonCarrierApplicationPage() {
             />
           </div>
 
-          <button type="submit" className="btn-primary w-full flex items-center justify-center gap-2">
+          <button type="submit" className="btn-render-primary w-full flex items-center justify-center gap-2">
             <Send className="w-5 h-5" />
             Submit Application
           </button>
         </form>
-      </div>
+        </div>
+      </section>
     </div>
   )
 }
