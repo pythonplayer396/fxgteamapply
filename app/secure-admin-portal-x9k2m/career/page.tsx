@@ -129,11 +129,29 @@ export default function CareerAdminPortal() {
         }),
       })
       
-      if (!response.ok) {
-        console.error('Failed to send Discord DM')
+      // Safely parse JSON response
+      let data
+      try {
+        const text = await response.text()
+        data = text ? JSON.parse(text) : { error: 'Empty response' }
+      } catch (parseError) {
+        console.error('Failed to parse response:', parseError)
+        data = { 
+          error: response.status === 504 
+            ? 'Request timeout - The bot API did not respond in time' 
+            : 'Invalid response from server'
+        }
       }
-    } catch (error) {
+      
+      if (!response.ok) {
+        console.error('Failed to send Discord DM:', data)
+      } else {
+        console.log('Discord DM sent successfully!')
+      }
+    } catch (error: any) {
       console.error('Error sending Discord notification:', error)
+      const errorMsg = error?.message || error?.toString() || 'Network error'
+      console.error('DM Error details:', errorMsg)
     }
   }
 

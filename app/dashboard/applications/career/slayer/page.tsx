@@ -89,53 +89,53 @@ export default function SlayerCarrierApplicationPage() {
 
         <div className="max-w-3xl mx-auto w-full">
           <Link href="/dashboard/applications/career" className="flex items-center gap-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] mb-6 transition-colors fade-in-up">
-            <ArrowLeft className="w-4 h-4" />
-            Back to Career Applications
-          </Link>
+          <ArrowLeft className="w-4 h-4" />
+          Back to Career Applications
+        </Link>
 
           <div className="render-panel mb-6 fade-in-up" style={{animationDelay: '0.1s'}}>
-            <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-[#FF1744]/20 rounded-xl flex items-center justify-center border border-[#FF1744]/30">
                 <Swords className="w-6 h-6 text-[#FF1744]" />
-              </div>
-              <div>
+            </div>
+            <div>
                 <h1 className="render-title">Slayer Carrier Application</h1>
                 <p className="render-subtitle">Join our slayer carry team</p>
-              </div>
             </div>
           </div>
+        </div>
 
-          {/* Important Note */}
+        {/* Important Note */}
           <div className="render-panel mb-6 border-l-4 border-l-[#FF6B35] fade-in-up" style={{animationDelay: '0.2s'}}>
-            <div className="flex items-start gap-3">
+          <div className="flex items-start gap-3">
               <AlertTriangle className="w-6 h-6 text-[#FF6B35] flex-shrink-0 mt-0.5" />
-              <div>
+            <div>
                 <h3 className="font-bold text-[#FF6B35] mb-2">Important Note</h3>
                 <p className="text-[var(--text-secondary)] text-sm">
-                  This role requires skill, consistency, and honesty. Any misuse or failure to perform duties will result in demotion or blacklist from the carrier team.
-                </p>
-              </div>
+                This role requires skill, consistency, and honesty. Any misuse or failure to perform duties will result in demotion or blacklist from the carrier team.
+              </p>
             </div>
           </div>
+        </div>
 
-          {/* Requirements */}
+        {/* Requirements */}
           <div className="render-panel mb-6 fade-in-up" style={{animationDelay: '0.3s'}}>
             <h3 className="font-bold text-lg mb-4 text-[var(--text-primary)]">Requirements:</h3>
             <ul className="space-y-2 text-[var(--text-secondary)]">
-              <li className="flex items-start gap-2">
+            <li className="flex items-start gap-2">
                 <CheckCircle className="w-5 h-5 text-[#FF1744] flex-shrink-0 mt-0.5" />
-                <span>Combat Level 30+ mandatory.</span>
-              </li>
-              <li className="flex items-start gap-2">
+              <span>Combat Level 30+ mandatory.</span>
+            </li>
+            <li className="flex items-start gap-2">
                 <CheckCircle className="w-5 h-5 text-[#FF1744] flex-shrink-0 mt-0.5" />
-                <span>Must not be part of any other server running fakepixel related giveaways strict policy.</span>
-              </li>
-              <li className="flex items-start gap-2">
+              <span>Must not be part of any other server running fakepixel related giveaways strict policy.</span>
+            </li>
+            <li className="flex items-start gap-2">
                 <CheckCircle className="w-5 h-5 text-[#FF1744] flex-shrink-0 mt-0.5" />
-                <span>Must follow all carrier guidelines strictly.</span>
-              </li>
-            </ul>
-          </div>
+              <span>Must follow all carrier guidelines strictly.</span>
+            </li>
+          </ul>
+        </div>
 
           <form onSubmit={handleSubmit} className="render-panel space-y-6 fade-in-up" style={{animationDelay: '0.4s'}}>
           <div>
@@ -292,7 +292,7 @@ export default function SlayerCarrierApplicationPage() {
             Submit Application
           </button>
         </form>
-        </div>
+      </div>
       </section>
     </div>
   )

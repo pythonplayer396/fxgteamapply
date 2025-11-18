@@ -58,36 +58,76 @@ export async function POST(request: Request) {
     const fullUrl = `${botApiUrl}${endpoint}`
     console.log('Calling bot API at:', fullUrl)
 
-    const response = await fetch(fullUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${botApiSecret}`
-      },
-      body: JSON.stringify({
-        discordId,
-        applicantName,
-        applicationType
+    // Create an AbortController for timeout
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 25000) // 25 second timeout
+
+    try {
+      const response = await fetch(fullUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${botApiSecret}`
+        },
+        body: JSON.stringify({
+          discordId,
+          applicantName,
+          applicationType
+        }),
+        signal: controller.signal
       })
-    })
 
-    console.log('Bot API response status:', response.status)
-    const data = await response.json()
-    console.log('Bot API response data:', data)
+      clearTimeout(timeoutId)
+      console.log('Bot API response status:', response.status)
 
-    if (!response.ok) {
-      console.error('Bot API error:', data)
+      // Check if response is ok before trying to parse JSON
+      if (!response.ok) {
+        let errorData
+        try {
+          const text = await response.text()
+          errorData = text ? JSON.parse(text) : { error: `HTTP ${response.status}` }
+        } catch {
+          errorData = { error: `HTTP ${response.status}: ${response.statusText}` }
+        }
+        console.error('Bot API error:', errorData)
+        return NextResponse.json({ 
+          error: 'Failed to send DM',
+          details: errorData.error || errorData 
+        }, { status: response.status >= 500 ? 502 : 500 })
+      }
+
+      // Safely parse JSON response
+      let data
+      try {
+        const text = await response.text()
+        data = text ? JSON.parse(text) : {}
+      } catch (parseError) {
+        console.error('Failed to parse bot API response:', parseError)
+        return NextResponse.json({ 
+          error: 'Invalid response from bot API',
+          details: 'Response was not valid JSON'
+        }, { status: 502 })
+      }
+
+      console.log('Bot API response data:', data)
+      console.log('✅ Discord DM sent successfully!')
       return NextResponse.json({ 
-        error: 'Failed to send DM',
-        details: data.error || data 
-      }, { status: 500 })
+        success: true, 
+        message: 'Discord DM sent successfully' 
+      })
+    } catch (fetchError: any) {
+      clearTimeout(timeoutId)
+      
+      if (fetchError.name === 'AbortError') {
+        console.error('Bot API request timed out after 25 seconds')
+        return NextResponse.json({ 
+          error: 'Request timeout',
+          details: 'The bot API did not respond in time. Please try again later.'
+        }, { status: 504 })
+      }
+      
+      throw fetchError // Re-throw other errors to be caught by outer catch
     }
-
-    console.log('✅ Discord DM sent successfully!')
-    return NextResponse.json({ 
-      success: true, 
-      message: 'Discord DM sent successfully' 
-    })
   } catch (error) {
     console.error('Error sending Discord DM:', error)
     return NextResponse.json({ 

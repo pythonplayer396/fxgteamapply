@@ -97,21 +97,21 @@ export default function DeveloperApplicationPage() {
 
         <div className="max-w-3xl mx-auto w-full">
           <Link href="/dashboard/applications/staff" className="flex items-center gap-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] mb-6 transition-colors fade-in-up">
-            <ArrowLeft className="w-4 h-4" />
-            Back to Applications
-          </Link>
+          <ArrowLeft className="w-4 h-4" />
+          Back to Applications
+        </Link>
 
           <div className="render-panel mb-6 fade-in-up" style={{animationDelay: '0.1s'}}>
-            <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-[var(--accent-purple)]/20 rounded-xl flex items-center justify-center border border-[var(--accent-purple)]/30">
                 <Code className="w-6 h-6 text-[var(--accent-purple)]" />
-              </div>
-              <div>
+            </div>
+            <div>
                 <h1 className="render-title">Developer Application</h1>
                 <p className="render-subtitle">Join our development team</p>
-              </div>
             </div>
           </div>
+        </div>
 
           <form onSubmit={handleSubmit} className="render-panel space-y-6 fade-in-up" style={{animationDelay: '0.2s'}}>
             {/* Discord info */}
@@ -270,7 +270,7 @@ export default function DeveloperApplicationPage() {
               Submit Application
             </button>
           </form>
-        </div>
+      </div>
       </section>
     </div>
   )

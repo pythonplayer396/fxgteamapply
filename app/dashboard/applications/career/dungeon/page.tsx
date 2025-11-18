@@ -91,61 +91,61 @@ export default function DungeonCarrierApplicationPage() {
 
         <div className="max-w-3xl mx-auto w-full">
           <Link href="/dashboard/applications/career" className="flex items-center gap-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] mb-6 transition-colors fade-in-up">
-            <ArrowLeft className="w-4 h-4" />
-            Back to Career Applications
-          </Link>
+          <ArrowLeft className="w-4 h-4" />
+          Back to Career Applications
+        </Link>
 
           <div className="render-panel mb-6 fade-in-up" style={{animationDelay: '0.1s'}}>
-            <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-[#FF6B35]/20 rounded-xl flex items-center justify-center border border-[#FF6B35]/30">
                 <Shield className="w-6 h-6 text-[#FF6B35]" />
-              </div>
-              <div>
+            </div>
+            <div>
                 <h1 className="render-title">Dungeon Carrier Application</h1>
                 <p className="render-subtitle">Join our dungeon carry team</p>
-              </div>
             </div>
           </div>
+        </div>
 
-          {/* Important Note */}
+        {/* Important Note */}
           <div className="render-panel mb-6 border-l-4 border-l-[#FF6B35] fade-in-up" style={{animationDelay: '0.2s'}}>
-            <div className="flex items-start gap-3">
+          <div className="flex items-start gap-3">
               <AlertTriangle className="w-6 h-6 text-[#FF6B35] flex-shrink-0 mt-0.5" />
-              <div>
+            <div>
                 <h3 className="font-bold text-[#FF6B35] mb-2">Important Note</h3>
                 <p className="text-[var(--text-secondary)] text-sm">
-                  This role is a trusted position. You'll represent FxG in dungeon carries. Ensure you meet all requirements before applying. Failing to disclose accurate information will result in immediate rejection or blacklisted from staff team.
-                </p>
-              </div>
+                This role is a trusted position. You'll represent FxG in dungeon carries. Ensure you meet all requirements before applying. Failing to disclose accurate information will result in immediate rejection or blacklisted from staff team.
+              </p>
             </div>
           </div>
+        </div>
 
-          {/* Requirements */}
+        {/* Requirements */}
           <div className="render-panel mb-6 fade-in-up" style={{animationDelay: '0.3s'}}>
             <h3 className="font-bold text-lg mb-4 text-[var(--text-primary)]">Requirements:</h3>
             <ul className="space-y-2 text-[var(--text-secondary)]">
-              <li className="flex items-start gap-2">
+            <li className="flex items-start gap-2">
                 <CheckCircle className="w-5 h-5 text-[#FF6B35] flex-shrink-0 mt-0.5" />
-                <span>Minimum catacombs level 18+.</span>
-              </li>
-              <li className="flex items-start gap-2">
+              <span>Minimum catacombs level 18+.</span>
+            </li>
+            <li className="flex items-start gap-2">
                 <CheckCircle className="w-5 h-5 text-[#FF6B35] flex-shrink-0 mt-0.5" />
-                <span>Must have proficiency in at least 2 Dungeon Classes.</span>
-              </li>
-              <li className="flex items-start gap-2">
+              <span>Must have proficiency in at least 2 Dungeon Classes.</span>
+            </li>
+            <li className="flex items-start gap-2">
                 <CheckCircle className="w-5 h-5 text-[#FF6B35] flex-shrink-0 mt-0.5" />
-                <span>Experience in F5–F7 & master floors preferred.</span>
-              </li>
-              <li className="flex items-start gap-2">
+              <span>Experience in F5–F7 & master floors preferred.</span>
+            </li>
+            <li className="flex items-start gap-2">
                 <CheckCircle className="w-5 h-5 text-[#FF6B35] flex-shrink-0 mt-0.5" />
-                <span>Must not be part of any other server running fakepixel related giveaways strict policy.</span>
-              </li>
-              <li className="flex items-start gap-2">
+              <span>Must not be part of any other server running fakepixel related giveaways strict policy.</span>
+            </li>
+            <li className="flex items-start gap-2">
                 <CheckCircle className="w-5 h-5 text-[#FF6B35] flex-shrink-0 mt-0.5" />
-                <span>Must maintain activity and professionalism during carries.</span>
-              </li>
-            </ul>
-          </div>
+              <span>Must maintain activity and professionalism during carries.</span>
+            </li>
+          </ul>
+        </div>
 
           <form onSubmit={handleSubmit} className="render-panel space-y-6 fade-in-up" style={{animationDelay: '0.4s'}}>
           <div>
@@ -334,7 +334,7 @@ export default function DungeonCarrierApplicationPage() {
             Submit Application
           </button>
         </form>
-        </div>
+      </div>
       </section>
     </div>
   )

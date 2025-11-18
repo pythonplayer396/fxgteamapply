@@ -61,27 +61,27 @@ export default function DashboardHome() {
             </p>
           </div>
 
-          {/* Quick Actions */}
+        {/* Quick Actions */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-20 max-w-4xl fade-in-up" style={{animationDelay: '0.1s'}}>
-            <Link href="/dashboard/profile">
+          <Link href="/dashboard/profile">
               <div className="render-panel group cursor-pointer fade-in-up relative overflow-hidden border-l-4 border-l-[var(--accent-purple)] hover:border-l-[var(--highlight-cyan)] transition-all duration-300">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--accent-purple)]/5 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
                 <div className="relative text-center">
                   <User className="w-8 h-8 text-[var(--accent-purple)] mx-auto mb-3 group-hover:scale-110 transition-transform" />
                   <h3 className="font-bold text-[var(--text-primary)]">Profile</h3>
                 </div>
-              </div>
-            </Link>
+            </div>
+          </Link>
 
-            <Link href="/dashboard/status">
+          <Link href="/dashboard/status">
               <div className="render-panel group cursor-pointer fade-in-up relative overflow-hidden border-l-4 border-l-[var(--accent-cyan)] hover:border-l-[var(--highlight-cyan)] transition-all duration-300" style={{animationDelay: '0.2s'}}>
                 <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--accent-cyan)]/5 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
                 <div className="relative text-center">
                   <FileText className="w-8 h-8 text-[var(--accent-cyan)] mx-auto mb-3 group-hover:scale-110 transition-transform" />
                   <h3 className="font-bold text-[var(--text-primary)]">Applications</h3>
                 </div>
-              </div>
-            </Link>
+            </div>
+          </Link>
 
             <Link href="/">
               <div className="render-panel group cursor-pointer fade-in-up relative overflow-hidden border-l-4 border-l-[var(--accent-green)] hover:border-l-[var(--highlight-cyan)] transition-all duration-300" style={{animationDelay: '0.3s'}}>
@@ -90,35 +90,35 @@ export default function DashboardHome() {
                   <ArrowRight className="w-8 h-8 text-[var(--accent-green)] mx-auto mb-3 group-hover:scale-110 transition-transform" />
                   <h3 className="font-bold text-[var(--text-primary)]">Home</h3>
                 </div>
-              </div>
+            </div>
             </Link>
-          </div>
+        </div>
 
-          {/* Application Options */}
+        {/* Application Options */}
           <div className="mb-10 fade-in-up" style={{animationDelay: '0.4s'}}>
             <h2 className="render-title text-center mb-4">Choose Application Type</h2>
             <p className="render-subtitle text-center">Pick your path</p>
-          </div>
+        </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {/* Staff Applications */}
-            <Link href="/dashboard/applications/staff">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          {/* Staff Applications */}
+          <Link href="/dashboard/applications/staff">
               <div className="render-panel group cursor-pointer fade-in-up relative overflow-hidden border-l-4 border-l-[var(--accent-green)] hover:border-l-[var(--highlight-cyan)] transition-all duration-300">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--accent-green)]/5 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
-                
-                <div className="relative">
+              
+              <div className="relative">
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center gap-3">
                       <div className="w-3 h-3 bg-[var(--accent-green)] rounded-full animate-pulse"></div>
                       <span className="text-sm font-medium text-[var(--text-secondary)] uppercase tracking-wider">Staff Team</span>
                     </div>
                     <div className="text-xs text-[var(--text-secondary)] bg-[var(--bg-secondary)] px-2 py-1 rounded">2 Roles</div>
-                  </div>
-                  
+                </div>
+                
                   <h3 className="text-2xl font-bold mb-3 text-[var(--text-primary)]">Apply for Staff</h3>
                   <p className="text-[var(--text-secondary)] mb-6 leading-relaxed">
                     Join our staff team as Helper or Developer. Build the community and create amazing experiences.
-                  </p>
+                </p>
 
                   <div className="flex items-center justify-between">
                     <div className="flex gap-2">
@@ -128,29 +128,29 @@ export default function DashboardHome() {
                     <div className="flex items-center text-[var(--accent-cyan)] font-medium group-hover:translate-x-1 transition-transform">
                       Apply <ArrowRight className="w-4 h-4 ml-1" />
                     </div>
-                  </div>
                 </div>
               </div>
-            </Link>
+            </div>
+          </Link>
 
-            {/* Career Applications */}
-            <Link href="/dashboard/applications/career">
+          {/* Career Applications */}
+          <Link href="/dashboard/applications/career">
               <div className="render-panel group cursor-pointer fade-in-up relative overflow-hidden border-l-4 border-l-[#FF6B35] hover:border-l-[var(--highlight-cyan)] transition-all duration-300" style={{animationDelay: '0.1s'}}>
                 <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF6B35]/5 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
-                
-                <div className="relative">
+              
+              <div className="relative">
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center gap-3">
                       <div className="w-3 h-3 bg-[#FF6B35] rounded-full animate-pulse"></div>
                       <span className="text-sm font-medium text-[var(--text-secondary)] uppercase tracking-wider">Career Team</span>
                     </div>
                     <div className="text-xs text-[var(--text-secondary)] bg-[var(--bg-secondary)] px-2 py-1 rounded">2 Roles</div>
-                  </div>
-                  
+                </div>
+                
                   <h3 className="text-2xl font-bold mb-3 text-[var(--text-primary)]">Apply for Career</h3>
                   <p className="text-[var(--text-secondary)] mb-6 leading-relaxed">
                     Join as Slayer or Dungeon Carrier. Elite combat specialists with premium rewards.
-                  </p>
+                </p>
 
                   <div className="flex items-center justify-between">
                     <div className="flex gap-2">
@@ -160,12 +160,12 @@ export default function DashboardHome() {
                     <div className="flex items-center text-[var(--accent-cyan)] font-medium group-hover:translate-x-1 transition-transform">
                       Apply <ArrowRight className="w-4 h-4 ml-1" />
                     </div>
-                  </div>
                 </div>
               </div>
-            </Link>
-          </div>
+            </div>
+          </Link>
         </div>
+      </div>
       </section>
     </div>
   )

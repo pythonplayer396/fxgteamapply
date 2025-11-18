@@ -42,13 +42,13 @@
   
   document.addEventListener('mouseup', function(e) {
     if (isDragging) {
-      isDragging = false;
-      document.documentElement.classList.remove('dragging');
-      
-      // Remove purple highlight from all elements
-      document.querySelectorAll('.drag-highlight').forEach(el => {
-        el.classList.remove('drag-highlight');
-      });
+    isDragging = false;
+    document.documentElement.classList.remove('dragging');
+    
+    // Remove purple highlight from all elements
+    document.querySelectorAll('.drag-highlight').forEach(el => {
+      el.classList.remove('drag-highlight');
+    });
     }
     hasMoved = false;
   });

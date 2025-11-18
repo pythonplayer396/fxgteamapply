@@ -94,21 +94,21 @@ export default function HelperApplicationPage() {
 
         <div className="max-w-3xl mx-auto w-full">
           <Link href="/dashboard/applications/staff" className="flex items-center gap-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] mb-6 transition-colors fade-in-up">
-            <ArrowLeft className="w-4 h-4" />
-            Back to Applications
-          </Link>
+          <ArrowLeft className="w-4 h-4" />
+          Back to Applications
+        </Link>
 
           <div className="render-panel mb-6 fade-in-up" style={{animationDelay: '0.1s'}}>
-            <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-[var(--accent-green)]/20 rounded-xl flex items-center justify-center border border-[var(--accent-green)]/30">
                 <Users className="w-6 h-6 text-[var(--accent-green)]" />
-              </div>
-              <div>
+            </div>
+            <div>
                 <h1 className="render-title">Helper Application</h1>
                 <p className="render-subtitle">Join our support team</p>
-              </div>
             </div>
           </div>
+        </div>
 
           <form onSubmit={handleSubmit} className="render-panel space-y-6 fade-in-up" style={{animationDelay: '0.2s'}}>
             {/* Discord info */}
@@ -222,7 +222,7 @@ export default function HelperApplicationPage() {
               Submit Application
             </button>
           </form>
-        </div>
+      </div>
       </section>
     </div>
   )

@@ -216,18 +216,33 @@ export default function AdminDashboard() {
         credentials: 'include',
       })
       
-      const data = await response.json()
+      // Safely parse JSON response
+      let data
+      try {
+        const text = await response.text()
+        data = text ? JSON.parse(text) : { error: 'Empty response' }
+      } catch (parseError) {
+        console.error('Failed to parse response:', parseError)
+        data = { 
+          error: response.status === 504 
+            ? 'Request timeout - The bot API did not respond in time' 
+            : 'Invalid response from server'
+        }
+      }
+      
       console.log('DM API response:', data)
       
       if (!response.ok) {
         console.error('Failed to send Discord DM:', data)
-        showSuccess(`Status updated but DM failed: ${data.error}`)
+        const errorMsg = data.error || data.details || 'Unknown error'
+        showSuccess(`Status updated but DM failed: ${errorMsg}`)
       } else {
         console.log('Discord DM sent successfully!')
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error sending Discord notification:', error)
-      showSuccess(`Status updated but DM failed: ${error}`)
+      const errorMsg = error?.message || error?.toString() || 'Network error'
+      showSuccess(`Status updated but DM failed: ${errorMsg}`)
     }
   }
 
@@ -412,101 +427,101 @@ export default function AdminDashboard() {
         </div>
 
         <div className="max-w-7xl mx-auto w-full">
-          {/* Success Message */}
-          {successMessage && (
+        {/* Success Message */}
+        {successMessage && (
             <div className="fixed top-24 right-4 z-50 bg-[var(--accent-green)] text-white px-6 py-3 shadow-lg fade-in-up">
-              ✓ {successMessage}
-            </div>
-          )}
+            ✓ {successMessage}
+          </div>
+        )}
 
-          {/* Loading Overlay */}
-          {loading && (
-            <div className="fixed inset-0 bg-black/50 z-40 flex items-center justify-center">
+        {/* Loading Overlay */}
+        {loading && (
+          <div className="fixed inset-0 bg-black/50 z-40 flex items-center justify-center">
               <div className="render-panel p-6">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--accent-cyan)] mx-auto"></div>
                 <p className="text-[var(--text-primary)] mt-4">Processing...</p>
-              </div>
             </div>
-          )}
+          </div>
+        )}
 
           <div className="flex items-center justify-between mb-8 fade-in-up">
-            <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-[var(--accent-purple)]/20 rounded-xl flex items-center justify-center border border-[var(--accent-purple)]/30">
                 <Shield className="w-6 h-6 text-[var(--accent-purple)]" />
               </div>
-              <div>
+            <div>
                 <h1 className="render-title">Admin Dashboard</h1>
                 <p className="render-subtitle">{stats.total} total applications</p>
               </div>
             </div>
             <button onClick={handleLogout} className="btn-render-secondary">
-              Logout
-            </button>
-          </div>
+            Logout
+          </button>
+        </div>
 
-          {/* Stats Cards */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
-            <button
-              onClick={() => setActiveTab('all')}
+        {/* Stats Cards */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
+          <button
+            onClick={() => setActiveTab('all')}
               className={`render-panel p-4 text-left fade-in-up transition-all ${
                 activeTab === 'all' ? 'border-[var(--accent-cyan)] border-2' : ''
-              }`}
+            }`}
               style={{animationDelay: '0.1s'}}
-            >
+          >
               <p className="text-[var(--text-secondary)] text-sm mb-1">Total</p>
               <p className="text-3xl font-bold text-[var(--text-primary)]">{stats.total}</p>
-            </button>
-            <button
-              onClick={() => setActiveTab('pending')}
+          </button>
+          <button
+            onClick={() => setActiveTab('pending')}
               className={`render-panel p-4 text-left fade-in-up border-l-4 transition-all ${
                 activeTab === 'pending' ? 'border-l-[#FF6B35]' : 'border-l-[#FF6B35]/30'
-              }`}
+            }`}
               style={{animationDelay: '0.2s'}}
-            >
+          >
               <p className="text-[#FF6B35] text-sm mb-1">Pending</p>
               <p className="text-3xl font-bold text-[#FF6B35]">{stats.pending}</p>
-            </button>
-            <button
-              onClick={() => setActiveTab('interview')}
+          </button>
+          <button
+            onClick={() => setActiveTab('interview')}
               className={`render-panel p-4 text-left fade-in-up border-l-4 transition-all ${
                 activeTab === 'interview' ? 'border-l-[var(--accent-cyan)]' : 'border-l-[var(--accent-cyan)]/30'
-              }`}
+            }`}
               style={{animationDelay: '0.3s'}}
-            >
+          >
               <p className="text-[var(--accent-cyan)] text-sm mb-1">Interview</p>
               <p className="text-3xl font-bold text-[var(--accent-cyan)]">{stats.interview}</p>
           </button>
-            <button
-              onClick={() => setActiveTab('approved')}
+          <button
+            onClick={() => setActiveTab('approved')}
               className={`render-panel p-4 text-left fade-in-up border-l-4 transition-all ${
                 activeTab === 'approved' ? 'border-l-[var(--accent-green)]' : 'border-l-[var(--accent-green)]/30'
-              }`}
+            }`}
               style={{animationDelay: '0.4s'}}
-            >
+          >
               <p className="text-[var(--accent-green)] text-sm mb-1">Approved</p>
               <p className="text-3xl font-bold text-[var(--accent-green)]">{stats.approved}</p>
-            </button>
-            <button
-              onClick={() => setActiveTab('denied')}
+          </button>
+          <button
+            onClick={() => setActiveTab('denied')}
               className={`render-panel p-4 text-left fade-in-up border-l-4 transition-all ${
                 activeTab === 'denied' ? 'border-l-[#FF1744]' : 'border-l-[#FF1744]/30'
-              }`}
+            }`}
               style={{animationDelay: '0.5s'}}
-            >
+          >
               <p className="text-[#FF1744] text-sm mb-1">Denied</p>
               <p className="text-3xl font-bold text-[#FF1744]">{stats.denied}</p>
-            </button>
-            <button
-              onClick={() => setActiveTab('interview_failed')}
+          </button>
+          <button
+            onClick={() => setActiveTab('interview_failed')}
               className={`render-panel p-4 text-left fade-in-up border-l-4 transition-all ${
                 activeTab === 'interview_failed' ? 'border-l-[#FF6B35]' : 'border-l-[#FF6B35]/30'
-              }`}
+            }`}
               style={{animationDelay: '0.6s'}}
-            >
+          >
               <p className="text-[#FF6B35] text-sm mb-1">Interview Failed</p>
               <p className="text-3xl font-bold text-[#FF6B35]">{stats.interviewFailed}</p>
-            </button>
-          </div>
+          </button>
+        </div>
 
         {/* Category Filter */}
         <div className="mb-6">
@@ -778,7 +793,7 @@ export default function AdminDashboard() {
             </div>
           )}
         </div>
-        </div>
+      </div>
       </section>
     </div>
   )

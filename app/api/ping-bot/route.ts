@@ -2,10 +2,12 @@ import { NextResponse } from 'next/server'
 
 export async function GET() {
   try {
-    const botApiUrl = process.env.BOT_API_URL || 'https://idk-rx11.onrender.com/'
+    const botApiUrl = process.env.BOT_API_URL || 'https://idk-rx11.onrender.com'
+    // Use /ping endpoint for lightweight keep-alive
+    const pingUrl = `${botApiUrl}/ping`
     
     console.log('Pinging bot API to keep it awake...')
-    const response = await fetch(botApiUrl, {
+    const response = await fetch(pingUrl, {
       method: 'GET',
     })
     
