@@ -119,9 +119,6 @@ export default function AdminDashboard() {
           setSelectedApp({ ...selectedApp, status: status as Application['status'] })
         }
         showSuccess(`Status updated to ${status}`)
-        
-        // Send Discord DM notification
-        await sendDiscordNotification(id, status)
       }
     } catch (error) {
       console.error('Error updating status:', error)
@@ -173,78 +170,7 @@ export default function AdminDashboard() {
     }
   }
 
-  const sendDiscordNotification = async (id: string, status: string) => {
-    const app = applications.find(a => a.id === id)
-    
-    console.log('Attempting to send Discord notification:', {
-      id,
-      status,
-      hasApp: !!app,
-      hasDiscordId: !!app?.sessionDiscordId,
-      discordId: app?.sessionDiscordId,
-      isCareer: app?.careerType === 'slayer' || app?.careerType === 'dungeon'
-    })
-    
-    if (!app) {
-      console.error('Application not found for Discord notification')
-      return
-    }
-    
-    if (!app.sessionDiscordId) {
-      console.error('No Discord ID found for application:', app)
-      showSuccess(`Status updated but no Discord DM sent (missing Discord ID)`)
-      return
-    }
 
-    const isCareerApp = app.careerType === 'slayer' || app.careerType === 'dungeon'
-
-    try {
-      console.log('Sending DM request to API...')
-      
-      // Use different endpoint for career applications
-      const endpoint = isCareerApp ? '/api/admin/send-career-dm' : '/api/admin/send-dm'
-      
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          discordId: app.sessionDiscordId,
-          applicantName: app.sessionUsername || app.discordUsername,
-          applicationType: app.careerType || app.type,
-          status: status
-        }),
-        credentials: 'include',
-      })
-      
-      // Safely parse JSON response
-      let data
-      try {
-        const text = await response.text()
-        data = text ? JSON.parse(text) : { error: 'Empty response' }
-      } catch (parseError) {
-        console.error('Failed to parse response:', parseError)
-        data = { 
-          error: response.status === 504 
-            ? 'Request timeout - The bot API did not respond in time' 
-            : 'Invalid response from server'
-        }
-      }
-      
-      console.log('DM API response:', data)
-      
-      if (!response.ok) {
-        console.error('Failed to send Discord DM:', data)
-        const errorMsg = data.error || data.details || 'Unknown error'
-        showSuccess(`Status updated but DM failed: ${errorMsg}`)
-      } else {
-        console.log('Discord DM sent successfully!')
-      }
-    } catch (error: any) {
-      console.error('Error sending Discord notification:', error)
-      const errorMsg = error?.message || error?.toString() || 'Network error'
-      showSuccess(`Status updated but DM failed: ${errorMsg}`)
-    }
-  }
 
   const deleteApplication = async (id: string) => {
     if (!confirm('Delete this application?')) return

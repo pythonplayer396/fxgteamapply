@@ -49,14 +49,6 @@ http://localhost:3000/api/auth/callback/discord
 - Total pending applications
 - Full application history with dates and status
 
-## 🤖 Bot DM Notifications (Next Step):
-
-To send DMs when applications are approved/declined, you'll need:
-1. Create a Discord Bot
-2. Add bot token to `.env.local`
-3. Bot must share a server with users
-4. I can add this feature next if you want!
-
 ## 🚀 Test It:
 
 1. Go to `http://localhost:3000`

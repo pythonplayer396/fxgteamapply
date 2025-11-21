@@ -97,9 +97,6 @@ export default function CareerAdminPortal() {
           setSelectedApp({ ...selectedApp, status: status as Application['status'] })
         }
         showSuccess(`Application ${status}`)
-        
-        // Send Discord DM notification
-        await sendDiscordNotification(id, status)
       }
     } catch (error) {
       console.error('Error updating status:', error)
@@ -108,52 +105,7 @@ export default function CareerAdminPortal() {
     }
   }
 
-  const sendDiscordNotification = async (id: string, status: string) => {
-    const app = applications.find(a => a.id === id)
-    
-    if (!app || !app.sessionDiscordId) {
-      console.error('No Discord ID found for application')
-      return
-    }
 
-    try {
-      const response = await fetch('/api/admin/send-dm', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          discordId: app.sessionDiscordId,
-          applicantName: app.sessionUsername || 'Applicant',
-          applicationType: app.careerType || app.type,
-          status: status,
-          isCareer: true
-        }),
-      })
-      
-      // Safely parse JSON response
-      let data
-      try {
-        const text = await response.text()
-        data = text ? JSON.parse(text) : { error: 'Empty response' }
-      } catch (parseError) {
-        console.error('Failed to parse response:', parseError)
-        data = { 
-          error: response.status === 504 
-            ? 'Request timeout - The bot API did not respond in time' 
-            : 'Invalid response from server'
-        }
-      }
-      
-      if (!response.ok) {
-        console.error('Failed to send Discord DM:', data)
-      } else {
-        console.log('Discord DM sent successfully!')
-      }
-    } catch (error: any) {
-      console.error('Error sending Discord notification:', error)
-      const errorMsg = error?.message || error?.toString() || 'Network error'
-      console.error('DM Error details:', errorMsg)
-    }
-  }
 
   if (!isAuthenticated) {
     return (
